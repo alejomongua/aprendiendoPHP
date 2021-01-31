@@ -12,9 +12,9 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="manifest" href="<?= BASE_URL ?>site.webmanifest">
+  <link rel="apple-touch-icon" href="<?= BASE_URL ?>icon.png">
+  <link rel="icon" type="image/png" href="<?= BASE_URL ?>icon.png">
   <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">

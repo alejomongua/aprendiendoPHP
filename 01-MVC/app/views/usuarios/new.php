@@ -1,6 +1,6 @@
 <h1 class="title">Registrarse</h1>
 
-<form action='index.php?action=create&controller=Usuarios' method='post'>
+<form action='<?= BASE_URL ?>Usuarios/create' method='post'>
   <div class="field">
     <label class="label">Nombre</label>
     <div class="control">

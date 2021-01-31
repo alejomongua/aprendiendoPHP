@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <img src="icon.png" width="28" height="28">
+      <img src="<?= BASE_URL ?>icon.png" width="28" height="28">
       <span class="ml-3">Inicio</span>
     </a>
 
