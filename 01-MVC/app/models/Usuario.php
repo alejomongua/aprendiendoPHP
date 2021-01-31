@@ -90,4 +90,8 @@ class Usuario extends Base {
 
     return new Usuario($array);
   }
+
+  public function verifyLogin(string $password) {
+    return password_verify($password, $this->password);
+  }
 }

@@ -36,10 +36,10 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href='index.php?controller=Usuarios&action=new'>
+          <a class="button is-primary" href='<?= BASE_URL ?>Usuarios/new'>
             <strong>Registrarse</strong>
           </a>
-          <a class="button is-light">
+          <a class="button is-light" href='<?= BASE_URL ?>Usuarios/login'>
             Iniciar sesión
           </a>
         </div>

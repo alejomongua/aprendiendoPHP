@@ -3,12 +3,16 @@
 require_once __DIR__ . '/../models/Usuario.php';
 
 class UsuariosController {
+  private function renderView(string $view) {
+    require_once __DIR__ . '/../views/usuarios/' . $view . '.php';
+  }
+
   public function index() {
     echo 'Controlador de usuarios, listado [TO DO]';
   }
 
   public function new() {
-    require_once __DIR__ . '/../views/usuarios/new.php';
+    $this->renderView('new');
   }
 
   public function create() {
@@ -48,5 +52,39 @@ class UsuariosController {
     }
 
     header('Location: ' . BASE_URL . '/Usuarios/new');
+  }
+
+  public function login() {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      $this->renderView('login');
+      return;
+    }
+
+    # Si es post, procese el login
+    if (!array_key_exists('email', $_POST) || !array_key_exists('password', $_POST) ||
+        $_POST['email'] === '' || $_POST['password'] === '') {
+      $_SESSION['danger'] = 'Ingrese el correo electrónico y la contraseña';
+      header('Location:' . BASE_URL . 'Usuarios/login');
+      return;
+    }
+
+    $usuario = Usuario::findByEmail($_POST['email']);
+
+    if (!$usuario) {
+      $_SESSION['danger'] = 'Combinación de correo/contraseña incorrectos';
+      header('Location:' . BASE_URL . 'Usuarios/login');
+      return;
+    }
+
+    $login = $usuario->verifyLogin($_POST['password']);
+
+    if (!$login) {
+      $_SESSION['danger'] = 'Combinación de correo/contraseña incorrectos';
+      header('Location:' . BASE_URL . 'Usuarios/login');
+      return;
+    }
+
+    $_SESSION['success'] = 'Bienvenido ' . $usuario->getNombre();
+    header('Location:' . BASE_URL);
   }
 }
