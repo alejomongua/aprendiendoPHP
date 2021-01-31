@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . '/app/controllers/autoload.php';
 require_once __DIR__ . '/config/configuracion.php';
 
@@ -11,6 +13,7 @@ $nombreControlador = isset($_GET['controller']) ? $_GET['controller'] . 'Control
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   require_once __DIR__ . '/app/views/layout/header.php';
   require_once __DIR__ . '/app/views/layout/menu.php';
+  require_once __DIR__ . '/app/views/layout/flash.php';
   require_once __DIR__ . '/app/views/layout/sidebar.php';
 }
 

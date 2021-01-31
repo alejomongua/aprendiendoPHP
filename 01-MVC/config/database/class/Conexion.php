@@ -198,4 +198,10 @@ class Conexion {
 
     return !!$this->currentQuery;
   }
+
+  public function escapeString($value) {
+    if ($value) {
+      return $this->conexion->escape_string($value);
+    }
+  }
 }

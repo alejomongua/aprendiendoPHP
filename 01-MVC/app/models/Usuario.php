@@ -9,17 +9,19 @@ class Usuario extends Base {
   protected $email;
   protected $rol;
   protected $imagen;
+  static private $atributos = [
+    'id',
+    'nombre',
+    'apellidos',
+    'password',
+    'email',
+    'rol',
+    'imagen',
+  ];
 
   public function __construct($data = null) {
-    $atributos = [
-      'nombre',
-      'apellidos',
-      'password',
-      'email',
-      'rol',
-      'imagen',
-    ];
-    parent::__construct('usuarios', $atributos, $data);
+
+    parent::__construct('usuarios', self::$atributos, $data);
   }
 
   public function getNombre() {
@@ -47,19 +49,19 @@ class Usuario extends Base {
   }
 
   public function setNombre($nombre) {
-    $this->nombre = Base::$conexion->escape_string($nombre);
+    $this->nombre = Base::$conexion->escapeString($nombre);
   }
 
   public function setApellidos($apellidos) {
-    $this->apellidos = Base::$conexion->escape_string($apellidos);
+    $this->apellidos = Base::$conexion->escapeString($apellidos);
   }
 
   public function setRol($rol) {
-    $this->rol = Base::$conexion->escape_string($rol);
+    $this->rol = Base::$conexion->escapeString($rol);
   }
 
   public function setImagen($imagen) {
-    $this->imagen = Base::$conexion->escape_string($imagen);
+    $this->imagen = Base::$conexion->escapeString($imagen);
   }
 
   public function setPassword($password) {
@@ -67,6 +69,25 @@ class Usuario extends Base {
   }
 
   public function setEmail($email) {
-    $this->email = Base::$conexion->escape_string($email);
+    $this->email = Base::$conexion->escapeString($email);
+  }
+
+  public static function findByEmail(string $email) {
+    Base::query('usuarios', [
+      'condiciones' => [
+        'email' => $email
+      ],
+      'limitar' => 1
+    ]);
+
+    $result = Base::fetchOne();
+
+    $array = [];
+
+    foreach(self::$atributos as $atributo) {
+      $array[$atributo] = $result->{$atributo};
+    }
+
+    return new Usuario($array);
   }
 }

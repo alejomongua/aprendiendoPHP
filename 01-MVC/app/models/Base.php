@@ -12,7 +12,6 @@ class Base {
     if (self::$conexion == null) self::$conexion = new Conexion();
 
     $this->tableName = $tableName;
-    array_unshift($atributos, 'id');
     $this->atributos = $atributos;
     if ($data) {
       for($i = 0; $i < count($atributos); $i++) {
@@ -33,19 +32,22 @@ class Base {
       $array = $this->toArray();
       unset($array['id']);
       if (!self::$conexion->actualizar($this->tableName, $this->id, $array)) {
-        throw new Exception('Error al actualizar');
+        # throw new Exception('Error al actualizar');
+        return false;
       }
     } else {
       if (property_exists($this, 'creado_en')) {
         $this->creado_en = date('Y-m-d H:i:s');
       }
       if (!self::$conexion->insertar($this->tableName, $this->toArray())){
-        throw new Exception('Error al insertar');
+        # throw new Exception('Error al insertar');
+        return false;
       }
       
       $ultima = self::$conexion->last($this->tableName);
       $this->id = $ultima->id;
     }
+    return true;
   }
 
   public function toArray() {
@@ -60,5 +62,15 @@ class Base {
 
   public function getId() {
     return $this->id;
+  }
+
+  public static function query(string $tabla, $opciones = null) {
+    if (self::$conexion == null) self::$conexion = new Conexion();
+
+    self::$conexion->query($tabla, $opciones);
+  }
+
+  public static function fetchOne() {
+    return self::$conexion->fetchOne();
   }
 }
