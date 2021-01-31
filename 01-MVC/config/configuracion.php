@@ -6,6 +6,7 @@
 
 // Se importa un archivo de secretos que no está en el repo
 require_once __DIR__.'/secretos.php';
+require_once __DIR__.'/constants.php';
 
 // DATABASE
 

@@ -166,6 +166,7 @@ class Conexion {
 
     $sqlquery .= " where id = $id";
     $this->sqlQuery($sqlquery);
+    return !!$this->currentQuery;
   }
 
   public function insertar(string $tabla, array $campos) {
@@ -177,7 +178,7 @@ class Conexion {
     $nombresCampos = array();
     if (count($campos)) {
       foreach ($campos as $campo => $valor) {
-        if (preg_match(ALPHANUMERIC_REGEX, $campo)) {
+        if (preg_match(ALPHANUMERIC_REGEX, $campo) && !is_null($valor)) {
           array_push($nombresCampos, $campo);
           if (is_string($valor)) {
             array_push($camposSanitizados, "'" . $this->conexion->escape_string($valor) . "'");
@@ -194,5 +195,7 @@ class Conexion {
     }
 
     $this->sqlQuery($sqlquery);
+
+    return !!$this->currentQuery;
   }
 }
