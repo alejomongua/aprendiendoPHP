@@ -36,7 +36,7 @@
       <button type='submit' class="button is-link">Enviar información</button>
     </div>
     <div class="control">
-      <a class="button is-link is-light" href='/'>Cancel</a>
+      <a class="button is-link is-light" href='<?= BASE_URL ?>'>Cancelar</a>
     </div>
   </div>
 </form>

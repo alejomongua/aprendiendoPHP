@@ -125,7 +125,7 @@ class Migracion {
         'creada_en' => $this->creada_en,
       ));
       $ultima = self::$conexion->last('migraciones');
-      $this->id = $ultima['id'];
+      $this->id = $ultima->id;
     }
   }
 }

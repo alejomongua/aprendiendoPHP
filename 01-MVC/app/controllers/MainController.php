@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../helpers/viewsHelpers.php';
 
-class Maincontroller {
+class MainController {
   public function index() {
     echo '<h1 class="title">Bienvenido</h1>';
   }

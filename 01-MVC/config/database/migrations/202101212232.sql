@@ -6,7 +6,7 @@ localidad       varchar(100) not null,
 direccion       varchar(255) not null,
 coste           float(200,2) not null,
 estado          varchar(20) not null,
-fecha           date,
+creado_en       timestamp,
 hora            time,
 CONSTRAINT pk_pedidos PRIMARY KEY(id),
 CONSTRAINT fk_pedido_usuario FOREIGN KEY(usuario_id) REFERENCES usuarios(id)

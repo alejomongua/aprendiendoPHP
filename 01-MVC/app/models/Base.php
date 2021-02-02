@@ -92,4 +92,23 @@ class Base {
 
     return $array;
   }
+
+  public static function filter($tableName, $atributos, $opciones = null) {
+    Base::query($tableName, $opciones);
+
+    $salida = [];
+
+    while($result = Base::fetchOne()) {
+      
+      $array = [];
+  
+      foreach($atributos as $atributo) {
+        $array[$atributo] = $result->{$atributo};
+      }
+  
+      array_push($salida, $array);
+    }
+
+    return $salida;
+  }
 }

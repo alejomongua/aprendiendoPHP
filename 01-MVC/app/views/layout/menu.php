@@ -16,19 +16,17 @@
     <div class="navbar-start">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          Categorias
+          Categorías
         </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">
-            Categoria 1
-          </a>
-          <a class="navbar-item">
-            Categoria 2
-          </a>
-          <a class="navbar-item">
-            Categoria 3
-          </a>
+          <?php
+            foreach(Categoria::listado() as $categoria) {
+              echo '<a class="navbar-item">';
+              echo $categoria->getNombre();
+              echo '</a>';
+            }
+          ?>
         </div>
 
       </div>

@@ -4,6 +4,7 @@ session_start();
 
 require_once __DIR__ . '/app/controllers/autoload.php';
 require_once __DIR__ . '/config/configuracion.php';
+require_once __DIR__ . '/app/models/Categoria.php';
 require_once __DIR__ . '/app/helpers/sessionHelpers.php';
 
 const ROOT_CONTROLLER = 'MainController';

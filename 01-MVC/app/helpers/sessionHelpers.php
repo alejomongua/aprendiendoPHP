@@ -16,3 +16,17 @@ function usuarioAdministrador() {
 
   return $usuario->getRol() === 'Admin';
 }
+
+function soloAdmin() {
+  if (!usuarioAdministrador()) {
+    $_SESSION['danger'] = 'No autorizado';
+    header('Location: ' . BASE_URL);
+    die();
+  }
+}
+
+function raise404() {
+  http_response_code(404);
+  echo '<h1 class="title">Pagina no encontrada</h1>';
+  die();
+}
