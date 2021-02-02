@@ -4,6 +4,7 @@ session_start();
 
 require_once __DIR__ . '/app/controllers/autoload.php';
 require_once __DIR__ . '/config/configuracion.php';
+require_once __DIR__ . '/app/helpers/sessionHelpers.php';
 
 const ROOT_CONTROLLER = 'MainController';
 const DEFAULT_ACTION = 'index';
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   require_once __DIR__ . '/app/views/layout/sidebar.php';
 }
 
-if (!class_exists($nombreControlador)) {
+if (!file_exists(__DIR__ . '/app/controllers/' . $nombreControlador . '.php')) {
   $nombreControlador = ROOT_CONTROLLER;
   $controlador = new $nombreControlador;
   $action = 'error404';

@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/">
+    <a class="navbar-item" href="<?= BASE_URL ?>">
       <img src="<?= BASE_URL ?>icon.png" width="28" height="28">
       <span class="ml-3">Inicio</span>
     </a>
@@ -30,18 +30,31 @@
             Categoria 3
           </a>
         </div>
-      </div>
-    </div>
 
+      </div>
+      <?php if (usuarioAdministrador()): ?>
+        <div class="navbar-item">
+          <a class="navbar-link is-arrowless" href="<?= BASE_URL ?>Main/administrar">
+            Administrar
+          </a>
+        </div>
+      <?php endif; ?>
+    </div>
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary" href='<?= BASE_URL ?>Usuarios/new'>
-            <strong>Registrarse</strong>
-          </a>
-          <a class="button is-light" href='<?= BASE_URL ?>Usuarios/login'>
-            Iniciar sesión
-          </a>
+          <?php if (usuarioIdentificado()): ?>
+            <a class="button is-danger" href='<?= BASE_URL ?>Usuarios/logout'>
+              <strong>Cerrar sesión</strong>
+            </a>
+          <?php else: ?>
+            <a class="button is-primary" href='<?= BASE_URL ?>Usuarios/new'>
+              <strong>Registrarse</strong>
+            </a>
+            <a class="button is-light" href='<?= BASE_URL ?>Usuarios/login'>
+              Iniciar sesión
+            </a>
+          <?php endif; ?>
         </div>
       </div>
     </div>

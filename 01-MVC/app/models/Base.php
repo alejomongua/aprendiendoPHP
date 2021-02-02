@@ -14,8 +14,8 @@ class Base {
     $this->tableName = $tableName;
     $this->atributos = $atributos;
     if ($data) {
-      for($i = 0; $i < count($atributos); $i++) {
-        $atributo = $atributos[$i];
+      for($i = 0; $i < count($this->atributos); $i++) {
+        $atributo = $this->atributos[$i];
 
         if (isset($data[$atributo])) {
           $this->{$atributo} = $data[$atributo];
@@ -72,5 +72,24 @@ class Base {
 
   public static function fetchOne() {
     return self::$conexion->fetchOne();
+  }
+
+  public static function findBy(string $tableName, array $atributos, string $field, $value) {
+    Base::query($tableName, [
+      'condiciones' => [
+        $field => $value
+      ],
+      'limitar' => 1
+    ]);
+
+    $result = Base::fetchOne();
+
+    $array = [];
+
+    foreach($atributos as $atributo) {
+      $array[$atributo] = $result->{$atributo};
+    }
+
+    return $array;
   }
 }

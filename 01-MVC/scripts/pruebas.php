@@ -18,5 +18,6 @@ if (PHP_SAPI !== 'cli') {
 require_once __DIR__ . '/../app/models/Usuario.php';
 
 $usuario = Usuario::findByEmail('admin@example.com');
+//$usuario = Usuario::find(1);
 
 var_dump($usuario);

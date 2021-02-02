@@ -9,6 +9,7 @@ class Usuario extends Base {
   protected $email;
   protected $rol;
   protected $imagen;
+
   static private $atributos = [
     'id',
     'nombre',
@@ -19,9 +20,10 @@ class Usuario extends Base {
     'imagen',
   ];
 
-  public function __construct($data = null) {
+  static private $tableName = 'usuarios';
 
-    parent::__construct('usuarios', self::$atributos, $data);
+  public function __construct($data = null) {
+    parent::__construct(self::$tableName, self::$atributos, $data);
   }
 
   public function getNombre() {
@@ -72,23 +74,15 @@ class Usuario extends Base {
     $this->email = Base::$conexion->escapeString($email);
   }
 
-  public static function findByEmail(string $email) {
-    Base::query('usuarios', [
-      'condiciones' => [
-        'email' => $email
-      ],
-      'limitar' => 1
-    ]);
+  public static function findByEmail($email) {
+    $result = parent::findBy(self::$tableName, self::$atributos, 'email', $email);
 
-    $result = Base::fetchOne();
+    return new Usuario($result);
+  }
 
-    $array = [];
-
-    foreach(self::$atributos as $atributo) {
-      $array[$atributo] = $result->{$atributo};
-    }
-
-    return new Usuario($array);
+  public static function find($id) {
+    $result = parent::findBy(self::$tableName, self::$atributos, 'id', $id);
+    return new Usuario($result);
   }
 
   public function verifyLogin(string $password) {

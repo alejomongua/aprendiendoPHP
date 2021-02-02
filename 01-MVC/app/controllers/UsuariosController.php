@@ -56,6 +56,12 @@ class UsuariosController {
 
   public function login() {
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+      if (array_key_exists('usuario', $_SESSION) && $_SESSION['usuario']) {
+        $_SESSION['danger'] = 'El usuario ya está identificado';
+        header('Location:' . BASE_URL);
+        return;
+      }
+
       $this->renderView('login');
       return;
     }
@@ -84,7 +90,20 @@ class UsuariosController {
       return;
     }
 
+    session_regenerate_id(true);
     $_SESSION['success'] = 'Bienvenido ' . $usuario->getNombre();
+    $_SESSION['usuario'] = serialize($usuario);
+    header('Location:' . BASE_URL);
+  }
+
+  public function logout() {
+    if (array_key_exists('usuario', $_SESSION) && $_SESSION['usuario']) {
+      session_regenerate_id(true);
+      unset($_SESSION['usuario']);
+      $_SESSION['success'] = 'Ha cerrado su sesión';
+    } else {
+      $_SESSION['danger'] = 'No hay sesión iniciada';
+    }
     header('Location:' . BASE_URL);
   }
 }

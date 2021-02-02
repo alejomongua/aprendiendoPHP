@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../helpers/viewsHelpers.php';
+
 class Maincontroller {
   public function index() {
     echo '<h1 class="title">Bienvenido</h1>';
@@ -12,5 +14,9 @@ class Maincontroller {
 
   public function error500() {
     echo '<h1 class="title">Error en la aplicación</h1>';
+  }
+
+  public function administrar() {
+    renderView('main/administrar');
   }
 }
