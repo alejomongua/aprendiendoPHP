@@ -1,6 +1,6 @@
 <h1 class="title">Editar <?= $categoria->getNombre(); ?></h1>
 
-<form action='<?= BASE_URL ?>Categorias/update?id=<?= $categoria->getId(); ?>' method='post'>
+<form action='<?= BASE_URL ?>Categorias/update&id=<?= $categoria->getId(); ?>' method='post'>
   <div class="field">
     <label class="label">Nombre</label>
     <div class="control">

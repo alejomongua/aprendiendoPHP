@@ -21,9 +21,9 @@
         <td><?= $categorias[$i]->getId(); ?></td>
         <td><?= $categorias[$i]->getNombre(); ?></td>
         <td>
-          <a href='<?= BASE_URL ?>Categorias/edit?id=<?= $categorias[$i]->getId() ?>'>Editar</a>
+          <a href='<?= BASE_URL ?>Categorias/edit&id=<?= $categorias[$i]->getId() ?>'>Editar</a>
           <br />
-          <a href='<?= BASE_URL ?>Categorias/destroy?id=<?= $categorias[$i]->getId() ?>'>Eliminar</a>
+          <a href='<?= BASE_URL ?>Categorias/destroy&id=<?= $categorias[$i]->getId() ?>'>Eliminar</a>
         </td>
       </tr>
     <?php endfor; ?>

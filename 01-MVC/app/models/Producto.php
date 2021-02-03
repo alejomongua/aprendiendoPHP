@@ -3,6 +3,8 @@
 require_once __DIR__ . '/Base.php';
 
 class Producto extends Base {
+  const IMAGES_FOLDER = __DIR__ . '/../../uploads/images/productos/';
+
   protected $nombre;
   protected $categoria_id;
   protected $descripcion;

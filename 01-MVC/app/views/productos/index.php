@@ -18,9 +18,9 @@
         <td><?= $productos[$i]->getPrecio(); ?></td>
         <td><?= $productos[$i]->getStock(); ?></td>
         <td>
-          <a href='<?= BASE_URL ?>Productos/edit?id=<?= $productos[$i]->getId() ?>'>Editar</a>
+          <a href='<?= BASE_URL ?>Productos/edit&id=<?= $productos[$i]->getId() ?>'>Editar</a>
           <br />
-          <a href='<?= BASE_URL ?>Productos/destroy?id=<?= $productos[$i]->getId() ?>'>Eliminar</a>
+          <a href='<?= BASE_URL ?>Productos/destroy&id=<?= $productos[$i]->getId() ?>'>Eliminar</a>
         </td>
       </tr>
     <?php endfor; ?>

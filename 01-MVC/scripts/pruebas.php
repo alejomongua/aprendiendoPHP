@@ -16,8 +16,20 @@ if (PHP_SAPI !== 'cli') {
 }
 
 require_once __DIR__ . '/../app/models/Usuario.php';
+require_once __DIR__ . '/../app/models/Producto.php';
 
-$usuario = Usuario::findByEmail('admin@example.com');
-//$usuario = Usuario::find(1);
+// $usuario = Usuario::findByEmail('admin@example.com');
+// $usuario = Usuario::find(1);
 
-var_dump($usuario);
+// var_dump($usuario);
+
+$mimeType = 'image/jp';
+// var_dump(preg_match('/^image\/(jpg|jpeg|gif|png)$/', $mimeType));
+
+// var_dump(Producto::IMAGES_FOLDER);
+
+if (!is_dir(Producto::IMAGES_FOLDER)) {
+  echo 'si';
+  mkdir(Producto::IMAGES_FOLDER, 0755, true);
+}
+

@@ -1,6 +1,10 @@
 <h1 class="title">Registrar un nuevo producto</h1>
 
-<form action='<?= BASE_URL ?>Productos/create' method='post'>
+<form
+  action='<?= BASE_URL ?>Productos/create'
+  enctype='multipart/form-data'
+  method='post'
+>
   <div class="field">
     <label class="label">Nombre</label>
     <div class="control">
@@ -61,6 +65,19 @@
       </select>
     </div>
   </div>
+  <div class="field">
+    <label class="label">Imagen</label>
+    <div class="control">
+      <input
+        name="imagen"
+        class="input"
+        type="file"
+        placeholder="Suba una imagen del producto"
+        accept="image/*"
+        capture="camera"
+        required />
+    </div>
+  </div
 
   <div class="field is-grouped">
     <div class="control">

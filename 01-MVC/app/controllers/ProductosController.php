@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/Producto.php';
+require_once __DIR__ . '/../helpers/utilHelpers.php';
 
 class ProductosController {
   public function index() {
@@ -39,6 +40,24 @@ class ProductosController {
       }
       if (array_key_exists('descripcion', $_POST)) {
         $producto->setDescripcion($_POST['descripcion']);
+      }
+
+      // Imagen del producto
+      if (array_key_exists('imagen', $_FILES)) {
+        $imageFile = $_FILES['imagen'];
+        $mimeType = $imageFile['type'];
+        if (preg_match('/^image\/(jpg|jpeg|gif|png)$/', $mimeType)) {
+          if (!is_dir(Producto::IMAGES_FOLDER)) {
+            mkdir(Producto::IMAGES_FOLDER, 0755, true);
+            var_dump(Producto::IMAGES_FOLDER);
+            die();
+          }
+
+          $randString = generateRandomString();
+          $filename = $randString . '-' . $imageFile['name'];
+          move_uploaded_file($imageFile['tmp_name'], Producto::IMAGES_FOLDER . $filename);
+          $producto->setImagen($filename);
+        }
       }
 
       if ($producto->save()) {
