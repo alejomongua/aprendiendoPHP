@@ -1,10 +1,12 @@
 <?php
 
 require_once __DIR__ . '/../helpers/viewsHelpers.php';
+require_once __DIR__ . '/../models/Producto.php';
 
 class MainController {
   public function index() {
-    echo '<h1 class="title">Bienvenido</h1>';
+    $productos = Producto::randomSample();
+    require_once __DIR__ . '/../views/main/index.php';
   }
 
   public function error404() {

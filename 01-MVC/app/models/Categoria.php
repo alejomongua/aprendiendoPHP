@@ -29,7 +29,7 @@ class Categoria extends Base {
     return new Categoria($result);
   }
 
-  public function listado() {
+  public static function listado() {
     $result = parent::filter(self::$tableName, self::$atributos);
 
     $salida = array();

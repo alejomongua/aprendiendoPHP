@@ -68,11 +68,15 @@ class Conexion {
     // order by
     $camposSanitizados = array();
 
-    if (array_key_exists('ordenar', $opciones) && count($opciones['ordenar'])) {
-      foreach ($opciones['ordenar'] as $orden => $modo) {
-        if (preg_match(ALPHANUMERIC_REGEX, $orden)) {
-          array_push($camposSanitizados, "$orden " . 
-                     (strtolower($modo) === 'desc' ? 'desc' : 'asc'));
+    if (array_key_exists('ordenar', $opciones)){
+      if ($opciones['ordenar'] === 'random') {
+        array_push($camposSanitizados, 'rand()');
+      } elseif (count($opciones['ordenar'])) {
+        foreach ($opciones['ordenar'] as $orden => $modo) {
+          if (preg_match(ALPHANUMERIC_REGEX, $orden)) {
+            array_push($camposSanitizados, "$orden " . 
+                      (strtolower($modo) === 'desc' ? 'desc' : 'asc'));
+          }
         }
       }
     }
@@ -149,7 +153,7 @@ class Conexion {
     $camposSanitizados = array();
     if (count($campos)) {
       foreach ($campos as $campo => $valor) {
-        if (preg_match(ALPHANUMERIC_REGEX, $campo)) {
+        if (preg_match(ALPHANUMERIC_REGEX, $campo) && !is_null($valor)) {
           if (is_string($valor)) {
             array_push($camposSanitizados, "$campo = '" .
                        $this->conexion->escape_string($valor) . "'");
@@ -165,6 +169,7 @@ class Conexion {
     }
 
     $sqlquery .= " where id = $id";
+
     $this->sqlQuery($sqlquery);
     return !!$this->currentQuery;
   }
@@ -196,6 +201,14 @@ class Conexion {
 
     $this->sqlQuery($sqlquery);
 
+    return !!$this->currentQuery;
+  }
+
+  public function eliminar(string $tabla, int $id) {
+    checkTableName($tabla);
+
+    $sqlquery = "delete from $tabla where id = $id";
+    $this->sqlQuery($sqlquery);
     return !!$this->currentQuery;
   }
 

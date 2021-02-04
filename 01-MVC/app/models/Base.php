@@ -64,6 +64,10 @@ class Base {
     return $this->id;
   }
 
+  public function destroy() {
+    return !self::$conexion->eliminar($this->tableName, $this->id);
+  }
+
   public static function query(string $tabla, $opciones = null) {
     if (self::$conexion == null) self::$conexion = new Conexion();
 
@@ -83,6 +87,11 @@ class Base {
     ]);
 
     $result = Base::fetchOne();
+
+    # Si no hay resultados retorne nulo
+    if (!$result) {
+      return null;
+    }
 
     $array = [];
 

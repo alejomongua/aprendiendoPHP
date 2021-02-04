@@ -3,7 +3,9 @@
 require_once __DIR__ . '/Base.php';
 
 class Producto extends Base {
-  const IMAGES_FOLDER = __DIR__ . '/../../uploads/images/productos/';
+  const IMAGES_FOLDER_RELATIVE_PATH = '/uploads/images/productos/';
+  const IMAGES_FOLDER = __DIR__ . '/../..' . Producto::IMAGES_FOLDER_RELATIVE_PATH;
+  const IMAGES_FOLDER_URL = BASE_URL . Producto::IMAGES_FOLDER_RELATIVE_PATH;
 
   protected $nombre;
   protected $categoria_id;
@@ -88,17 +90,23 @@ class Producto extends Base {
     return $this->imagen;
   }
 
+  public function getImagenUrl() {
+    return Producto::IMAGES_FOLDER_URL . $this->imagen;
+  }
+
   public function setImagen($imagen) {
     $this->imagen = Base::$conexion->escapeString($imagen);
   }
 
   public static function find($id) {
     $result = parent::findBy(self::$tableName, self::$atributos, 'id', $id);
-    return new Producto($result);
+    if ($result) {
+      return new Producto($result);
+    }
   }
 
-  public function listado() {
-    $result = parent::filter(self::$tableName, self::$atributos);
+  public static function listado($opciones = null) {
+    $result = parent::filter(self::$tableName, self::$atributos, $opciones);
 
     $salida = array();
     for($i = 0; $i < count($result); $i++) {
@@ -106,5 +114,9 @@ class Producto extends Base {
     }
 
     return $salida;
+  }
+
+  public static function randomSample(int $limit = 10) {
+    return self::listado(['ordenar' => 'random', 'limitar' => $limit]);
   }
 }

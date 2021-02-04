@@ -28,5 +28,6 @@ function soloAdmin() {
 function raise404() {
   http_response_code(404);
   echo '<h1 class="title">Pagina no encontrada</h1>';
+  require_once __DIR__ . '/../views/layout/footer.php';
   die();
 }
