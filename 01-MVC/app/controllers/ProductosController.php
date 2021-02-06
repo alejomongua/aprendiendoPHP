@@ -73,7 +73,7 @@ class ProductosController {
 
   public function update() {
     soloAdmin();
-    $producto = self::encontrarProducto();
+    $producto = self::encontrarProducto('id');
 
     if (array_key_exists('nombre', $_POST) && $_POST['nombre'] !== '') {
       $producto->setNombre($_POST['nombre']);
@@ -119,21 +119,21 @@ class ProductosController {
 
   public function edit() {
     soloAdmin();
-    $producto = self::encontrarProducto();
+    $producto = self::encontrarProducto('id');
     $accion = 'update&id=' . $producto->getId();
     require_once __DIR__ . '/../views/productos/edit.php';
     require_once __DIR__ . '/../views/productos/form.php';
   }
 
   public function show() {
-    $producto = self::encontrarProducto();
+    $producto = self::encontrarProducto('id');
     require_once __DIR__ . '/../views/productos/show.php';
   }
 
   public function destroy() {
     soloAdmin();
     
-    $producto = self::encontrarProducto();
+    $producto = self::encontrarProducto('id');
 
     if ($producto->destroy()) {
       $_SESSION['danger'] = 'Hubo un error al eliminar el registro';
@@ -144,11 +144,11 @@ class ProductosController {
     header('Location: ' . BASE_URL . 'Productos/index');
   }
 
-  public static function encontrarProducto() {
-    if (!array_key_exists('id', $_GET)) {
+  public static function encontrarProducto(string $llave) {
+    if (!array_key_exists($llave, $_GET)) {
       raise404();
     }
-    $producto = Producto::find(intval($_GET['id']));
+    $producto = Producto::find(intval($_GET[$llave]));
 
     if (!$producto) {
       raise404();

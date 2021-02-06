@@ -24,7 +24,11 @@
         $<?= number_format($producto->getPrecio(), 0, ',', '.') ?>
       </p>
       <p>
-        <a class="button is-primary" href="#" <?= $producto->getStock() ? '' : 'disabled' ?>>
+        <a
+          class="button is-primary"
+          href="<?= BASE_URL . 'Carrito/add&producto=' . $producto->getId() ?>"
+          <?= $producto->getStock() ? '' : 'disabled' ?>
+        >
           Añadir al carrito
         </a>
       </p>
