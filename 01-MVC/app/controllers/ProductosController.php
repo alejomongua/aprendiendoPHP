@@ -125,6 +125,11 @@ class ProductosController {
     require_once __DIR__ . '/../views/productos/form.php';
   }
 
+  public function show() {
+    $producto = self::encontrarProducto();
+    require_once __DIR__ . '/../views/productos/show.php';
+  }
+
   public function destroy() {
     soloAdmin();
     

@@ -51,7 +51,7 @@ class Producto extends Base {
   }
 
   public function getPrecio() {
-    return $this->precio;
+    return intval($this->precio);
   }
 
   public function setPrecio($precio) {
@@ -96,6 +96,32 @@ class Producto extends Base {
 
   public function setImagen($imagen) {
     $this->imagen = Base::$conexion->escapeString($imagen);
+  }
+
+  public function show() {
+    
+    echo '<a href="' . BASE_URL . 'Productos/show&id=' . $this->id . '">';
+    echo '<div class="box">';
+    echo '<article class="media">';
+    echo '<div class="media-left">';
+    if ($this->imagen) {
+      echo '<figure class="image is-128x128 is-clipped">';
+      echo '<img src="' . $this->getImagenUrl() . '" alt="Image">';
+      echo '</figure>';
+    }
+    echo '</div>';
+    echo '<div class="media-content">';
+    echo '<div class="content">';
+    echo '<p>';
+    echo '<strong>' . $this->nombre . '</strong> <span>' . $this->precio . '</span> <small class="is-italic">' . $this->stock . ' disponibles</small>';
+    echo '<br>';
+    echo $this->descripcion;
+    echo '</p>';
+    echo '</div>';
+    echo '</div>';
+    echo '</article>';
+    echo '</div>';
+    echo '</a>';
   }
 
   public static function find($id) {
