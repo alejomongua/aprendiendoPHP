@@ -22,7 +22,7 @@
         <div class="navbar-dropdown">
           <?php
             foreach(Categoria::listado() as $categoria) {
-              echo '<a class="navbar-item">';
+              echo '<a class="navbar-item" href="' . BASE_URL . 'Categorias/show&id=' . $categoria->getId() . '">';
               echo $categoria->getNombre();
               echo '</a>';
             }

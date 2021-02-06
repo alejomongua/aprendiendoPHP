@@ -49,4 +49,15 @@ class CategoriasController {
 
     require_once __DIR__ . '/../views/categorias/edit.php';
   }
+
+  public function show() {
+    $categoria = Categoria::find(intval($_GET['id']));
+
+    if (!$categoria) {
+      echo 'DOS';
+      raise404();
+    }
+
+    require_once __DIR__ . '/../views/categorias/show.php';
+  }
 }

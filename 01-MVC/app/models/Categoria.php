@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/Base.php';
+require_once __DIR__ . '/Producto.php';
 
 class Categoria extends Base {
   protected $nombre;
@@ -22,6 +23,10 @@ class Categoria extends Base {
 
   public function setNombre($nombre) {
     $this->nombre = Base::$conexion->escapeString($nombre);
+  }
+
+  public function productos() {
+    return Producto::listado(['condiciones' => ['categoria_id' => $this->id]]);
   }
 
   public static function find($id) {
