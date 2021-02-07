@@ -31,3 +31,15 @@ function raise404() {
   require_once __DIR__ . '/../views/layout/footer.php';
   die();
 }
+
+function identificarse() {
+  $usuario = usuarioIdentificado();
+  if (!$usuario) {
+    $_SESSION['danger'] = 'Por favor identifíquese primero';
+    $_SESSION['retornar_a'] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header('Location: ' . BASE_URL . 'Usuarios/login');
+    die();
+  }
+
+  return $usuario;
+}

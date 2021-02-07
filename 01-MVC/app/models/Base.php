@@ -74,6 +74,12 @@ class Base {
     self::$conexion->query($tabla, $opciones);
   }
 
+  public static function insertar(string $tabla, $opciones = null) {
+    if (self::$conexion == null) self::$conexion = new Conexion();
+
+    return self::$conexion->insertar($tabla, $opciones);
+  }
+
   public static function fetchOne() {
     return self::$conexion->fetchOne();
   }

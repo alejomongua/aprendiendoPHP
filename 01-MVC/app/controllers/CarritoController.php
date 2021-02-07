@@ -49,8 +49,14 @@ class CarritoController {
   public function remove() {
     self::inicializarCarrito();
 
-    # to do
-    echo '<h1 class="title">Quitar del carrito</h1>';
+    redirect('Carrito/index');
+    if (!array_key_exists($_GET['producto'], $_SESSION['carrito'])) {
+      $_SESSION['danger'] = 'El elemento no existe en el carrito';
+      return;
+    }
+
+    unset($_SESSION['carrito'][$_GET['producto']]);
+    $_SESSION['success'] = 'Producto eliminado del carrito';
   }
 
   public function clear() {

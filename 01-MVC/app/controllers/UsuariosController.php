@@ -93,6 +93,11 @@ class UsuariosController {
     session_regenerate_id(true);
     $_SESSION['success'] = 'Bienvenido ' . $usuario->getNombre();
     $_SESSION['usuario'] = serialize($usuario);
+    if (array_key_exists('retornar_a', $_SESSION)) {
+      header('Location:' . $_SESSION['retornar_a']);
+      unset($_SESSION['retornar_a']);
+      return;
+    }
     header('Location:' . BASE_URL);
   }
 

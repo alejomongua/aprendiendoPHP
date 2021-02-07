@@ -56,6 +56,15 @@ class Conexion {
                        $this->conexion->escape_string($valor) . "'");
             continue;
           }
+          if (is_array($valor)) {
+            $arrayIntermedio = [];
+            foreach($valor as $item) {
+              array_push($arrayIntermedio, intval($item));
+            }
+            array_push($camposSanitizados, "$condicion in (" .
+                       implode(', ') . ')');
+            continue;
+          }
           array_push($camposSanitizados, "$condicion = $valor");
         }
       }

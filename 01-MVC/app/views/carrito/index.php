@@ -29,7 +29,7 @@
           <td><?= $cantidad ?></td>
           <td>$ <?= number_format($productos[$productoId]->getPrecio() * $cantidad, 0, ',', '.') ?></td>
           <td>
-            <a class="button is-danger" href="#">
+            <a class="button is-danger"  href="<?= BASE_URL . 'Carrito/remove&producto=' . $productos[$productoId]->getId() ?>">
               Eliminar del carrito
             </a>
           </td>
@@ -45,7 +45,7 @@
       </p>
     </div>
     <div class="column is-half-desktop is-full-mobile">
-      <a class="button is-success">
+      <a class="button is-success" href="<?= BASE_URL ?>Pedidos/new">
         Realizar el pedido
       </a>
     </div>
