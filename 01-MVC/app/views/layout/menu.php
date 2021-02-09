@@ -42,6 +42,9 @@
       <div class="navbar-item">
         <div class="buttons">
           <?php if (usuarioIdentificado()): ?>
+            <a class="button is-primary" href='<?= BASE_URL ?>Usuarios/misPedidos'>
+              <strong>Ver mis pedidos</strong>
+            </a>
             <a class="button is-danger" href='<?= BASE_URL ?>Usuarios/logout'>
               <strong>Cerrar sesión</strong>
             </a>

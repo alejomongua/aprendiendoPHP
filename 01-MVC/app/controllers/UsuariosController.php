@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../models/Usuario.php';
+require_once __DIR__ . '/../models/Pedido.php';
+require_once __DIR__ . '/../helpers/sessionHelpers.php';
 
 class UsuariosController {
   private function renderView(string $view) {
@@ -110,5 +112,12 @@ class UsuariosController {
       $_SESSION['danger'] = 'No hay sesión iniciada';
     }
     header('Location:' . BASE_URL);
+  }
+
+  public function misPedidos() {
+    $usuarioActual = identificarse();
+
+    $pedidos = Pedido::findByUsuarioId($usuarioActual->getId());
+    require_once __DIR__ . '/../views/usuarios/mis_pedidos.php';
   }
 }

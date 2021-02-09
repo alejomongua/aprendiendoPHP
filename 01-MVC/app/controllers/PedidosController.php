@@ -121,7 +121,7 @@ class PedidosController {
     $pedido = Pedido::find(intval($_GET[$llave]));
     
     if (!$pedido) {
-      raise404();
+        raise404();
     }
 
     return $pedido;

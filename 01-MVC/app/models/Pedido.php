@@ -141,11 +141,19 @@ class Pedido extends Base {
     return true;
   }
 
-  public static function find($id) {
+  public static function find(int $id) {
     $result = parent::findBy(self::$tableName, self::$atributos, 'id', $id);
     if ($result) {
       return new Pedido($result);
     }
+  }
+
+  public static function findByUsuarioId(int $idUsuario) {
+    return Pedido::listado([
+      'condiciones' => [
+        'usuario_id' => $idUsuario
+      ]
+    ]);
   }
 
   public static function listado($opciones = null) {
