@@ -3,9 +3,15 @@
 require_once __DIR__ . '/Base.php';
 
 class Pedido extends Base {
-  const IMAGES_FOLDER_RELATIVE_PATH = '/uploads/images/pedidos/';
-  const IMAGES_FOLDER = __DIR__ . '/../..' . Pedido::IMAGES_FOLDER_RELATIVE_PATH;
-  const IMAGES_FOLDER_URL = BASE_URL . Pedido::IMAGES_FOLDER_RELATIVE_PATH;
+  const ESTADOS = [
+    'Creado',
+    'Confirmado',
+    'Procesando',
+    'En tránsito',
+    'Entregado',
+    'Finalizado',
+    'Abortado',
+  ];
 
   protected $usuario_id;
   protected $departamento;

@@ -83,7 +83,7 @@ class PedidosController {
 
 
       if ($pedido->save()) {
-        $_SESSION['success'] = 'El pedido ha sido realizado exitosamente exitoso';
+        $_SESSION['success'] = 'El pedido ha sido realizado exitosamente';
         $_SESSION['carrito'] = array();
         header('Location: ' . BASE_URL . 'Pedidos/confirmacion&id=' . $pedido->getId());
         return;
@@ -110,6 +110,7 @@ class PedidosController {
   public function edit() {
     soloAdmin();
     $pedido = PedidosController::encontrarPedido('id');
+    require_once __DIR__ . '/../views/pedidos/edit.php';
   }
 
   public function destroy() {
@@ -120,6 +121,22 @@ class PedidosController {
   public function update() {
     soloAdmin();
     $pedido = PedidosController::encontrarPedido('id');
+
+    if (!array_key_exists('estado', $_POST) || !in_array($_POST['estado'], Pedido::ESTADOS)) {
+      $_SESSION['danger'] = 'Hubo un error al intentar registrar el pedido, estado no es válido';
+      header('Location: ' . BASE_URL . 'Pedidos/new');
+      return;
+    }
+
+    $pedido->setEstado($_POST['estado']);
+
+    if ($pedido->save()) {
+      $_SESSION['success'] = 'El estado del pedido ha sido actualizado exitosamente';
+      header('Location: ' . BASE_URL . 'Pedidos/index');
+      return;
+    }
+    $_SESSION['danger'] = 'Hubo un error al intentar registrar el pedido';
+
   }
 
   public function confirmacion() {

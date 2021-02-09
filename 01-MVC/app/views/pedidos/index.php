@@ -7,6 +7,7 @@
       <th><abbr title="Usuario">Usuario</abbr></th>
       <th><abbr title="Fecha">Fecha</abbr></th>
       <th><abbr title="Total">Total</abbr></th>
+      <th><abbr title="Total">Estado</abbr></th>
       <th><abbr title="Acciones">Acciones</abbr></th>
     </tr>
   </thead>
@@ -20,11 +21,10 @@
         </td>
         <td><?= $pedidos[$i]->getUsuario()->getNombreCompleto(); ?></td>
         <td><?= $pedidos[$i]->getFecha(); ?></td>
-        <td><?= $pedidos[$i]->getCoste(); ?></td>
+        <td><?= number_format($pedidos[$i]->getCoste(), 0, ',', '.') ?></td>
+        <td><?= $pedidos[$i]->getEstado() ?></td>
         <td>
-          <a href='<?= BASE_URL ?>Pedidos/edit&id=<?= $pedidos[$i]->getId() ?>'>Editar</a>
-          <br />
-          <a href='<?= BASE_URL ?>Pedidos/destroy&id=<?= $pedidos[$i]->getId() ?>'>Eliminar</a>
+          <a href='<?= BASE_URL ?>Pedidos/edit&id=<?= $pedidos[$i]->getId() ?>'>Cambiar estado</a>
         </td>
       </tr>
     <?php endfor; ?>
