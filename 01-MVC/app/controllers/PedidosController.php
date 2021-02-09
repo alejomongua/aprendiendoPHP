@@ -94,6 +94,19 @@ class PedidosController {
     header('Location: ' . BASE_URL . 'Pedidos/new');
   }
 
+  public function show() {
+    $usuarioActual = identificarse();
+
+    $pedido = PedidosController::encontrarPedido('id');
+
+    if ($usuarioActual->getId() !== $pedido->getUsuarioId() && $usuarioActual->getRol() !== 'Admin') {
+      $_SESSION['danger'] = 'No autorizado';
+      header('Location: ' . BASE_URL);
+      die();
+    }
+    require_once __DIR__ . '/../views/pedidos/show.php';
+  }
+
   public function edit() {
     soloAdmin();
     $pedido = PedidosController::encontrarPedido('id');
@@ -110,7 +123,15 @@ class PedidosController {
   }
 
   public function confirmacion() {
+    $usuarioActual = identificarse();
+
     $pedido = PedidosController::encontrarPedido('id');
+
+    if ($usuarioActual->getId() !== $pedido->getUsuarioId() && $usuarioActual->getRol() !== 'Admin') {
+      $_SESSION['danger'] = 'No autorizado';
+      header('Location: ' . BASE_URL);
+      die();
+    }
     require_once __DIR__ . '/../views/pedidos/confirmacion.php';
   }
 

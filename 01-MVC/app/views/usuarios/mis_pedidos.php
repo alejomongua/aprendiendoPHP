@@ -12,7 +12,11 @@
   <tbody>
     <?php for($i = 0; $i < count($pedidos); $i++): ?>
       <tr>
-        <td><?= $pedidos[$i]->getId(); ?></td>
+        <td>
+          <a href="<?= BASE_URL . 'Pedidos/show&id=' . $pedidos[$i]->getId() ?>">
+            <?= $pedidos[$i]->getId(); ?>
+          </a>
+        </td>
         <td><?= $pedidos[$i]->getFecha(); ?></td>
         <td><?= $pedidos[$i]->getCoste(); ?></td>
         <td>
