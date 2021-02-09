@@ -50,6 +50,10 @@ class Usuario extends Base {
     return $this->email;
   }
 
+  public function getNombreCompleto() {
+    return $this->nombre . ' ' . $this->apellido;
+  }
+
   public function setNombre($nombre) {
     $this->nombre = Base::$conexion->escapeString($nombre);
   }

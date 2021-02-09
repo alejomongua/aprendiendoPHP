@@ -17,6 +17,7 @@ class Pedido extends Base {
   private $productos;
 
   static private $atributos = [
+    'id',
     'usuario_id',
     'departamento',
     'ciudad',
@@ -84,6 +85,10 @@ class Pedido extends Base {
     $this->estado = Base::$conexion->escapeString($estado);
   }
 
+  public function getFecha() {
+    return $this->creado_en;
+  }
+
   public function getUsuarioId() {
     return $this->usuario_id;
   }
@@ -105,7 +110,7 @@ class Pedido extends Base {
     return $productos;
   }
 
-  public function getCantidades() {
+  public function getListaProductos() {
     return $this->productos;
   }
 

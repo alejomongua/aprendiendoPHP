@@ -6,7 +6,8 @@ require_once __DIR__ . '/../models/Pedido.php';
 class PedidosController {
   public function index() {
     soloAdmin();
-    # to do
+    $pedidos = Pedido::listado();
+    require_once __DIR__ . '/../views/pedidos/index.php';
   }
 
   public function new() {
