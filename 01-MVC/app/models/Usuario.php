@@ -31,7 +31,7 @@ class Usuario extends Base {
   }
 
   public function getApellidos() {
-    return $this->apellido;
+    return $this->apellidos;
   }
 
   public function getRol() {
@@ -51,7 +51,7 @@ class Usuario extends Base {
   }
 
   public function getNombreCompleto() {
-    return $this->nombre . ' ' . $this->apellido;
+    return $this->nombre . ' ' . $this->apellidos;
   }
 
   public function setNombre($nombre) {

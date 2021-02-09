@@ -93,4 +93,38 @@ class PedidosController {
 
     header('Location: ' . BASE_URL . 'Pedidos/new');
   }
+
+  public function edit() {
+    soloAdmin();
+    $pedido = PedidosController::encontrarPedido('id');
+  }
+
+  public function destroy() {
+    soloAdmin();
+    $pedido = PedidosController::encontrarPedido('id');
+  }
+
+  public function update() {
+    soloAdmin();
+    $pedido = PedidosController::encontrarPedido('id');
+  }
+
+  public function confirmacion() {
+    $pedido = PedidosController::encontrarPedido('id');
+    require_once __DIR__ . '/../views/pedidos/confirmacion.php';
+  }
+
+  public static function encontrarPedido(string $llave) {
+    if (!array_key_exists($llave, $_GET)) {
+      raise404();
+    }
+    $pedido = Pedido::find(intval($_GET[$llave]));
+    
+    if (!$pedido) {
+      raise404();
+    }
+
+    return $pedido;
+  }
+
 }

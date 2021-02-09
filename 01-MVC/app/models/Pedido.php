@@ -40,7 +40,7 @@ class Pedido extends Base {
       ]);
 
       while ($linea = Base::fetchOne()) {
-        $this->addProducto($linea->producto_id, $linea->cantidad);
+        $this->addProducto($linea->producto_id, $linea->unidades);
       }
     }
   }
@@ -144,7 +144,7 @@ class Pedido extends Base {
   public static function find($id) {
     $result = parent::findBy(self::$tableName, self::$atributos, 'id', $id);
     if ($result) {
-      $pedido = new Pedido($result);
+      return new Pedido($result);
     }
   }
 
