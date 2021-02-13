@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function welcome() {
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
         return view('Main.welcome');
     }
 
-    public function echo($mensaje) {
-        echo $mensaje;
-    }
 }

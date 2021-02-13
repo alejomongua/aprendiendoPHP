@@ -13,5 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\MainController@welcome');
-Route::get('/echo/{mensaje}', 'App\Http\Controllers\MainController@echo');
+Route::get('/', 'App\Http\Controllers\MainController@index')->name('root');
+
+Auth::routes();
