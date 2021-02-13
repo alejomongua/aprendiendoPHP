@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodoList extends Migration
+class CreateImages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateTodoList extends Migration
      */
     public function up()
     {
-        Schema::create('todos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('estado');
-            $table->text('contenido');
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('path');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateTodoList extends Migration
      */
     public function down()
     {
-        Schema::drop('todos');
+        Schema::drop('images');
     }
 }
