@@ -34,8 +34,19 @@
               href="{{ url('/') }}">
                 {{ config('app.name', 'Instaclone') }}
             </a>
+            @auth
+            <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="">{{ Auth::user()->nickname }}</a>
+            <form method='POST' action={{ route('logout') }}>
+              @csrf
+              <button type="submit" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ __('Logout') }}</button>
+            </form>
+            @endauth
+            
+            @guest
             <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="{{ route('login') }}">{{ __('Login') }}</a>
             <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="{{ route('register') }}">{{ __('Register') }}</a>
+            @endguest
+
           </div>
         </div>
       </div>
