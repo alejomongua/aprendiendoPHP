@@ -14,7 +14,7 @@ class ModifyUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->nullable();
+            $table->integer('role')->default(0);
             $table->string('nickname')->unique();
             $table->integer('profile_image_id')->unsigned()->nullable();
             $table->foreign('profile_image_id')->references('id')->on('images');
