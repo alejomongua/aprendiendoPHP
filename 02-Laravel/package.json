@@ -15,9 +15,11 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.6",
-        "resolve-url-loader": "^2.3.1",
-        "tailwindcss": "^2.0.3",
-        "vue": "^2.5.17",
-        "vue-template-compiler": "^2.6.10"
+        "tailwindcss": "^2.0.3"
+    },
+    "dependencies": {
+        "babel-plugin-transform-class-properties": "^6.24.1",
+        "stimulus": "^2.0.0",
+        "turbolinks": "^5.2.0"
     }
 }

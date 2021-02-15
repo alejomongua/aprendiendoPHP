@@ -8,5 +8,4 @@
 
         <p>To do: Render landing page<p>
     </div>
-
 @endsection
