@@ -3,14 +3,16 @@
 @section('content')
 <div class="container mx-auto">
     <div class="bg-gray-100 rounded-xl p-8">
-        <div class="text-xl font-thin leading-10 border-b-2 text-center w-full">
+        <h1 class="text-xl font-thin leading-10 border-b-2 text-center w-full">
             {{ __('Verify Your Email Address') }}
-        </div>
+        </h1>
 
         <div>
             @if (session('resent'))
-                <div class="alert alert-success" role="alert">
-                    {{ __('A fresh verification link has been sent to your email address.') }}
+                <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500">
+                    <span class="inline-block align-middle mr-8">
+                        {{ __('A fresh verification link has been sent to your email address.') }}
+                    </span>
                 </div>
             @endif
 

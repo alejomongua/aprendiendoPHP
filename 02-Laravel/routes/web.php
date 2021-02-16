@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::get('/home', 'App\Http\Controllers\MainController@home')->name('home');
-});
-
 /* Rutas públicas */
 Route::get('/', 'App\Http\Controllers\MainController@index')->name('root');
 
 Auth::routes();
 /* Fin rutas públicas */
+
+Route::group(['middleware' => 'auth'], function () {
+  Route::get('/home', 'App\Http\Controllers\MainController@home')->name('home');
+  Route::resource('users', 'App\Http\Controllers\UserController');
+  Route::get('/edit-my-profile', 'App\Http\Controllers\UserController@editMyProfile')->name('editMyProfile');
+});

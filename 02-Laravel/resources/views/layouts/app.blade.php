@@ -23,6 +23,21 @@
     <div id="app">
         @include('layouts.navbar')
 
+        @if(session('danger'))
+            <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500">
+                <span class="inline-block align-middle mr-8">
+                    {{ session('danger') }}
+                </span>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500">
+                <span class="inline-block align-middle mr-8">
+                    {{ session('success') }}
+                </span>
+            </div>
+        @endif
         <main class="py-4">
             @yield('content')
         </main>

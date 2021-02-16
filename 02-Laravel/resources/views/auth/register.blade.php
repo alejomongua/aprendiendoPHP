@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mx-auto">
     <div class="bg-gray-100 rounded-xl p-8">
-        <div class="text-xl font-thin leading-10 border-b-2 text-center w-full">
+        <h1 class="text-xl font-thin leading-10 border-b-2 text-center w-full">
             {{ __('Register') }}
-        </div>
+        </h1>
 
         <div class="font-light">
             <form method="POST" action="{{ route('register') }}">

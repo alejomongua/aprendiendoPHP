@@ -3,14 +3,16 @@
 @section('content')
 <div class="container mx-auto">
     <div class="bg-gray-100 rounded-xl p-8">
-        <div class="text-xl font-thin leading-10 border-b-2 text-center w-full">
-            <div class="card-header">{{ __('Reset Password') }}</div>
-        </div>
+        <h1 class="text-xl font-thin leading-10 border-b-2 text-center w-full">
+            {{ __('Reset Password') }}
+        </h1>
 
         <div class="font-light">
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+                <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500">
+                    <span class="inline-block align-middle mr-8">
+                        {{ session('status') }}
+                    </span>
                 </div>
             @endif
 
