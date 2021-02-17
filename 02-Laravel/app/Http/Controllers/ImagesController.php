@@ -24,7 +24,7 @@ class ImagesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Images.new');
     }
 
     /**
@@ -35,7 +35,7 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // To do
     }
 
     /**

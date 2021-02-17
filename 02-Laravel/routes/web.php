@@ -23,4 +23,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/home', 'App\Http\Controllers\MainController@home')->name('home');
   Route::resource('users', 'App\Http\Controllers\UserController');
   Route::get('/edit-my-profile', 'App\Http\Controllers\UserController@editMyProfile')->name('editMyProfile');
+
+  Route::resource('images', 'App\Http\Controllers\ImagesController');
 });

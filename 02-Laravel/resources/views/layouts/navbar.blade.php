@@ -17,7 +17,12 @@
           <div class="flex justify-between space-x-4">
             <div class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               <a
-                href="{{ url('/') }}"
+                @auth
+                  href="{{ route('home') }}"
+                @endauth
+                @guest
+                  href="{{ url('/') }}"
+                @endguest
               >
                 {{ config('app.name', 'Instaclone') }}
               </a>

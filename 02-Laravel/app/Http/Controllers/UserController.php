@@ -57,8 +57,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        echo 'hola';
-        die();
+        $currentUser = $request->user();
+
+        if ($currentUser->id !== $user->id && $currentUser->role < 3) {
+            return redirect()->route('home')
+                             ->with(['danger' => __('Access denied')]);
+        }
+
+        return view('Users.edit', [
+            'title' => __( 'Edit user\'s profile'),
+            'user' => $user,
+        ]);
     }
 
     public function editMyProfile(Request $request)
