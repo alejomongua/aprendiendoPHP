@@ -35,7 +35,29 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-        // To do
+        $image = $request->file('image');
+        if (!$image) {
+            return redirect()->route('images.create')
+                             ->with('danger', __('No image was recieved'));
+        }
+
+        $imageName = time() . "-" . $image->getClientOriginalName();
+        $image->storeAs('images', $imageName);
+
+        $newImage = new Image();
+
+        $description = $request->input('description') ? 
+                            $request->input('description') :
+                            '';
+        $newImage->description = $description;
+        $newImage->user_id = $request->user()->id;
+        $newImage->path = $imageName;
+        
+        $newImage->save();
+
+        return redirect()
+            ->route('home')
+            ->with('success', __('You have successfully upload image.'));
     }
 
     /**

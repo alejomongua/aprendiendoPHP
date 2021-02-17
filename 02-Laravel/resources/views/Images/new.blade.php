@@ -23,6 +23,12 @@
                 data-imageUpload-target='input'
                 data-action='change->imageUpload#render'
               />
+              <textarea
+                class="p-4 w-full border-2 rounded my-4 h-32"
+                value="{{ old('description') }}"
+                name="description"
+                placeholder="Description"
+              ></textarea>
             <button type="submit" class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg">
                 {{ __('Submit') }}
             </button>
