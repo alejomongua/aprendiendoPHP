@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Image');
     }
 
-    public function profile_image() {
+    public function profileImage() {
         return $this->belongsTo('App\Image', 'profile_image_id');
     }
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImagesController extends Controller
 {
@@ -50,13 +52,14 @@ class ImagesController extends Controller
                             $request->input('description') :
                             '';
         $newImage->description = $description;
+        $newImage->mimetype = $image->getMimetype();
         $newImage->user_id = $request->user()->id;
         $newImage->path = $imageName;
         
         $newImage->save();
 
         return redirect()
-            ->route('home')
+            ->route('images.show', $newImage->id)
             ->with('success', __('You have successfully upload image.'));
     }
 
@@ -68,7 +71,9 @@ class ImagesController extends Controller
      */
     public function show(Image $image)
     {
-        //
+        return view('Images.show', [
+            'image' => $image,
+        ]);
     }
 
     /**
@@ -103,5 +108,22 @@ class ImagesController extends Controller
     public function destroy(Image $image)
     {
         //
+    }
+
+    /**
+     * Get the specified resource from storage.
+     *
+     * @param  \App\Models\Image  $image
+     * @return \Illuminate\Http\Response
+     */
+    public function get(int $imageId) {
+        $image = Image::find($imageId);
+        if (!$image) {
+            return abort(404);
+        }
+
+        $file = Storage::disk('images')->get($image->path);
+        $response = new Response($file, 200);
+        return $response->header('Content-Type', $image->mimetype);
     }
 }

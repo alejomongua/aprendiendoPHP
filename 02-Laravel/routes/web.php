@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/home', 'App\Http\Controllers\MainController@home')->name('home');
   Route::resource('users', 'App\Http\Controllers\UserController');
   Route::get('/edit-my-profile', 'App\Http\Controllers\UserController@editMyProfile')->name('editMyProfile');
+  Route::get('/view-my-profile', 'App\Http\Controllers\UserController@viewMyProfile')->name('viewMyProfile');
 
   Route::resource('images', 'App\Http\Controllers\ImagesController');
+  Route::get('/images/{id}/get', 'App\Http\Controllers\ImagesController@get')->name('images.get');
 });

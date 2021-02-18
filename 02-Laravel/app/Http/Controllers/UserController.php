@@ -46,7 +46,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('Users.show', [
+            'title' => $user->nickname . '\'s profile',
+            'user' => $user,
+        ]);
+
     }
 
     /**
@@ -76,6 +80,16 @@ class UserController extends Controller
             
         return view('Users.edit', [
             'title' => __( 'Edit my profile'),
+            'user' => $user,
+        ]);
+    }
+
+    public function viewMyProfile(Request $request)
+    {
+        $user = $request->user();
+            
+        return view('Users.show', [
+            'title' => __( 'My profile'),
             'user' => $user,
         ]);
     }
