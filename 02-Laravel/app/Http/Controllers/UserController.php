@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -123,6 +124,22 @@ class UserController extends Controller
         $user->update();
 
         return redirect()->route('home')
+                         ->with(['success' => __('Data updated successfully')]);
+    }
+
+    public function convertInProfile(Request $request, int $imageId) {
+        $currentUser = $request->user();
+        
+        $image = Image::find($imageId);
+
+        if (!$image || $image->user_id !== $currentUser->id) {
+            return abort(404);
+        }
+
+        $currentUser->profile_image_id = $imageId;
+
+        $currentUser->update();
+        return redirect()->route('viewMyProfile')
                          ->with(['success' => __('Data updated successfully')]);
     }
 

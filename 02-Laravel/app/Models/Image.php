@@ -32,14 +32,14 @@ class Image extends Model
     ];
 
     public function comments() {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     public function likes() {
-        return $this->hasMany('App\Like');
+        return $this->hasMany(Like::class);
     }
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }
