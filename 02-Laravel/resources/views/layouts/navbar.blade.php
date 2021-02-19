@@ -15,7 +15,7 @@
       <div class="flex-1 flex items-center sm:items-stretch sm:justify-start">
         <div class="hidden sm:block w-full" data-navbar-target='mainMenu'>
           <div class="flex justify-between space-x-4">
-            <div class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <div class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
               <a
                 @auth
                   href="{{ route('home') }}"
@@ -29,7 +29,7 @@
             </div>
             <div>
               @auth
-              <div class='relative inline-block'>
+              <div class='relative'>
                 <button
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   data-action="click->navbar#toggleLoginMenu"

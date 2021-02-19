@@ -8,6 +8,10 @@ export default class extends Controller {
     'submit',
   ]
 
+  pick () {
+    this.inputTarget.click()
+  }
+
   render () {
     if (this.inputTarget.files && this.inputTarget.files[0]) {
       var reader = new FileReader();
@@ -20,7 +24,7 @@ export default class extends Controller {
         this.placeholderTarget
           .classList.add('hidden')
         this.submitTarget
-          .classList.add('hidden')
+          .classList.remove('hidden')
       };
 
       reader.readAsDataURL(this.inputTarget.files[0]);

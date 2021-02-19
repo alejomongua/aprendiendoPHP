@@ -37,6 +37,9 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'image' => 'required|image',
+        ]);
         $image = $request->file('image');
         if (!$image) {
             return redirect()->route('images.create')

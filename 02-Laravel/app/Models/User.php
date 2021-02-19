@@ -46,11 +46,11 @@ class User extends Authenticatable
     ];
 
     public function images() {
-        return $this->hasMany('App\Image');
+        return $this->hasMany('App\Models\Image');
     }
 
     public function profileImage() {
-        return $this->belongsTo('App\Image', 'profile_image_id');
+        return $this->belongsTo('App\Models\Image', 'profile_image_id');
     }
 
     public function setPassword(string $password) {

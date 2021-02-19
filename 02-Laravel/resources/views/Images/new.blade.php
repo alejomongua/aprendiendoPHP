@@ -9,27 +9,44 @@
 
       <div class="flex justify-items-auto">
         <div class="w-full m-3">
+          @error('image')
+            <span class="text-red-600" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+          @enderror
           <form method="POST" action="{{ route('images.store') }}" enctype="multipart/form-data">
               @csrf
 
               <input 
                 type="file"
                 name="image"
-                class="p-4 w-full border-2 rounded @error('image') border-red-600 @enderror"
+                class="hidden"
                 name="image"
+                accept="image/*"
                 value="{{ old('image') }}"
                 required
                 autofocus
                 data-imageUpload-target='input'
                 data-action='change->imageUpload#render'
               />
+              <button
+                type="submit"
+                class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg"
+                data-action="click->imageUpload#pick"
+              >
+                  {{ __('Pick an image') }}
+              </button>
+              
               <textarea
                 class="p-4 w-full border-2 rounded my-4 h-32"
                 value="{{ old('description') }}"
                 name="description"
                 placeholder="Description"
               ></textarea>
-            <button type="submit" class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg">
+            <button
+              type="submit"
+              class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg hidden"
+              data-imageUpload-target='submit'>
                 {{ __('Submit') }}
             </button>
 

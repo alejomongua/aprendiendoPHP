@@ -50,6 +50,23 @@
       </div>
     </div>
   </div>
+
+  <div>
+    <h2 class='text-lg font-light leading-8 border-b-2 text-center w-full'>{{ __('Posts') }}</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      @foreach ($user->images as $image)
+        <div class="bordered border-gray-400 m-4">
+          <div>
+            <img src="{{ route('images.get', $image->id) }}" />
+          </div>
+          <div>
+            {{ $image->description }}
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
 </div>
 
 @endsection

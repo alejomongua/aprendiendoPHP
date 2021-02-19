@@ -4848,6 +4848,11 @@ var _default = /*#__PURE__*/function (_Controller) {
   }
 
   _createClass(_default, [{
+    key: "pick",
+    value: function pick() {
+      this.inputTarget.click();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
@@ -4862,7 +4867,7 @@ var _default = /*#__PURE__*/function (_Controller) {
 
           _this.placeholderTarget.classList.add('hidden');
 
-          _this.submitTarget.classList.add('hidden');
+          _this.submitTarget.classList.remove('hidden');
         };
 
         reader.readAsDataURL(this.inputTarget.files[0]);
