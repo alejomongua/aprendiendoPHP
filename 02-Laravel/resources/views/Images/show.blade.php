@@ -3,16 +3,23 @@
 @section('content')
 <div class="container mx-auto">
   <div class="bg-gray-100 rounded-xl p-8">
-    <div class="flex justify-items-auto">
-      <div class="w-full m-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 justify-items-auto">
+      <div class="m-3">
         <img
           src="{{ route('images.get', $image->id) }}"
           data-imageUpload-target='image'
         />
-    </div>
-      <div class="w-full m-3">
-        <p>{{ $image->description }}</p>
       </div>
+      <div class="m-3">
+        <div class="m-2 p-4 bg-gray-200 text-gray-700 font-light bordered rounded">
+          {{ $image->description }}
+        </div>
+
+        <div class="m-2 p-4 italic font-thin text-sm">
+          {{ $image->created_at }}
+        </div>
+      </div>
+    </div>
   </div>
   @if ($image->user->id === Auth::user()->id)
     <div class=my-4>
