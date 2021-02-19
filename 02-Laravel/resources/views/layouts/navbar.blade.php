@@ -34,7 +34,13 @@
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   data-action="click->navbar#toggleLoginMenu"
                 >
-                  {{ Auth::user()->nickname }}
+                  <img
+                    class="rounded-full h-12 w-12 inline mr-4"
+                    src={{ route('images.get', Auth::user()->profile_image_id) }}
+                  />
+                  <div class='inline'>
+                    {{ Auth::user()->nickname }}
+                  </div>
                 </button>
                 <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-40 hidden" data-navbar-target="loginMenu">
                   <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
