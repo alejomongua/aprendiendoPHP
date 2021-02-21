@@ -16,7 +16,13 @@
         </div>
 
         <div class="m-2 p-4 italic font-thin text-sm">
-          {{ $image->created_at }}
+          {{ __('Uploaded by') }}
+          @if (Auth::user()->id === $image->user->id)
+            {{ __('me') }}
+          @else
+            {{ $image->user->nickname }}
+          @endif
+          {{ __('on ') . $image->created_at->format('l j F Y H:i:s') }}
         </div>
       </div>
     </div>
