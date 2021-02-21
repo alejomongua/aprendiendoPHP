@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Image;
 
 class MainController extends Controller
 {
@@ -24,8 +25,10 @@ class MainController extends Controller
     public function home(Request $request)
     {
         $user = $request->user();
+        $images = Image::orderBy('id', 'desc')->get();
         return view('Main.home', [
             'user' => $user,
+            'images' => $images,
         ]);
     }
 
