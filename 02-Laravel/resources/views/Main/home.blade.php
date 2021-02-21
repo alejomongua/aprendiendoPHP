@@ -57,6 +57,7 @@
           </svg>
           <span class="inline m-4" data-like-target="text">{{ $image->likedByMe() ? 'Unlike' : 'Like' }}</span>
         </span>
+        <span class="inline m-4"><span data-like-target="conteo">{{ $image->likes->count() }}</span> <span data-like-target="plural">{{ $image->likes->count() === 1 ? 'like' : 'likes' }}</span></span>
       </div>
     @endforeach
     <div>

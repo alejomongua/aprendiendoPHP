@@ -4965,21 +4965,30 @@ var _default = /*#__PURE__*/function (_Controller) {
               case 3:
                 response = _context.sent;
                 this.iconTarget.classList.toggle('hidden');
-                this.textTarget.innerText = this.textTarget.innerText === 'Like' ? 'Unlike' : 'Like';
-                _context.next = 11;
+
+                if (this.textTarget.innerText === 'Like') {
+                  this.textTarget.innerText = 'Unlike';
+                  this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) + 1;
+                } else {
+                  this.textTarget.innerText = 'Like';
+                  this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) - 1;
+                }
+
+                this.pluralTarget.innerText = parseInt(this.conteoTarget.innerText, 10) === 1 ? 'like' : 'likes';
+                _context.next = 12;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 8]]);
+        }, _callee, this, [[0, 9]]);
       }));
 
       function likeAction() {
@@ -4993,7 +5002,7 @@ var _default = /*#__PURE__*/function (_Controller) {
   return _default;
 }(stimulus__WEBPACK_IMPORTED_MODULE_1__.Controller);
 
-_default.targets = ['icon', 'text'];
+_default.targets = ['icon', 'text', 'conteo', 'plural'];
 _default.values = {
   url: String
 };
