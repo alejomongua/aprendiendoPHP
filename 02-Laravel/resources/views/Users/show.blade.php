@@ -56,14 +56,14 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       @foreach ($user->images as $image)
-        <div class="bordered border-gray-400 m-4">
+        <a class="bordered border-gray-400 m-4" href="{{ route('images.show', $image->id) }}">
           <div>
             <img src="{{ route('images.get', $image->id) }}" />
           </div>
           <div>
             {{ $image->description }}
           </div>
-        </div>
+        </a>
       @endforeach
     </div>
   </div>

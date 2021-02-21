@@ -20,7 +20,9 @@
           @if (Auth::user()->id === $image->user->id)
             {{ __('me') }}
           @else
-            {{ $image->user->nickname }}
+            <a href="{{ route('users.show', $image->user->id) }}">
+              {{ $image->user->nickname }}
+            </a>
           @endif
           {{ __('on ') . $image->created_at->format('l j F Y H:i:s') }}
         </div>

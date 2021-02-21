@@ -34,10 +34,12 @@
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   data-action="click->navbar#toggleLoginMenu"
                 >
-                  <img
-                    class="rounded-full h-12 w-12 inline mr-4"
-                    src={{ route('images.get', Auth::user()->profile_image_id) }}
-                  />
+                  @if (Auth::user()->profile_image_id)
+                    <img
+                      class="rounded-full h-12 w-12 inline mr-4"
+                      src={{ route('images.get', Auth::user()->profile_image_id) }}
+                    />
+                  @endif
                   <div class='inline'>
                     {{ Auth::user()->nickname }}
                   </div>
