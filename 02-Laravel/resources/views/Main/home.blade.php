@@ -46,9 +46,13 @@
           </div>
         </a>
 
-        <a href="#" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">
-          {{ __('Comments') }}
-        </a>
+        <div class="font-thin my-4 inline">
+          <a class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg" href="{{ route('images.create') }}">
+            {{ __('Comment') }}
+          </a>
+        </div>
+
+        <span class="inline m-4">{{ $image->comments->count() }} {{ $image->likes->count() === 1 ? __('Comment') : __('Comments') }}</span>
 
         <span class="text-red-500 cursor-pointer" data-action="click->like#likeAction">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="m-4 inline" viewBox="0 0 16 16">
