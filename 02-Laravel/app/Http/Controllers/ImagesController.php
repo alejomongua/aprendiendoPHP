@@ -119,7 +119,7 @@ class ImagesController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function get(int $imageId) {
+    public function get(Request $request, int $imageId) {
         $image = Image::find($imageId);
         if (!$image) {
             return abort(404);

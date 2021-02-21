@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Image extends Model
 {
@@ -41,5 +42,12 @@ class Image extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function likedByMe() {
+        return Like::where([
+            'user_id' => Auth::user()->id,
+            'image_id' => $this->id,
+        ])->count();
     }
 }
