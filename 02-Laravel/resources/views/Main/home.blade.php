@@ -47,6 +47,9 @@
         </a>
       </div>
     @endforeach
+    <div>
+      {{ $images->links() }}
+    </div>
   </div>
 
 </div>

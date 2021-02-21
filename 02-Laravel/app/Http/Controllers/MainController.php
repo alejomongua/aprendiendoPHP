@@ -25,7 +25,7 @@ class MainController extends Controller
     public function home(Request $request)
     {
         $user = $request->user();
-        $images = Image::orderBy('id', 'desc')->get();
+        $images = Image::orderBy('id', 'desc')->paginate(10);
         return view('Main.home', [
             'user' => $user,
             'images' => $images,
