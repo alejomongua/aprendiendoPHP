@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Comment;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -128,5 +129,26 @@ class ImagesController extends Controller
         $file = Storage::disk('images')->get($image->path);
         $response = new Response($file, 200);
         return $response->header('Content-Type', $image->mimetype);
+    }
+
+    public function comment(Request $request, int $imageId) {
+        $this->validate($request, [
+            'comment' => 'required|string',
+        ]);
+
+        $image = Image::find($imageId);
+        if (!$image) {
+            return abort(404);
+        }
+
+        $comment = Comment::create([
+            'user_id' => $request->user()->id,
+            'image_id' => $imageId,
+            'content' => $request->input('comment'),
+        ]);
+
+        return redirect()
+            ->route('images.show', $image->id)
+            ->with('success', __('Comment uploaded successfully.'));
     }
 }

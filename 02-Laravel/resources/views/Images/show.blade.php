@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto">
-  <div class="bg-gray-100 rounded-xl p-8">
+  <div class="bg-gray-100 rounded-xl p-8 pb-2">
     <div class="grid grid-cols-1 md:grid-cols-2 justify-items-auto">
       <div class="m-3">
         <img
@@ -28,9 +28,34 @@
         </div>
       </div>
     </div>
+
+    <div class="p-8 mt-4 bg-gray-100 rounded boreder border-gray-400">
+      @foreach ($image->comments as $comment)
+        <div class="italic m-2">
+          {{ $comment->content }}
+        </div>
+        <div class="font-light text-sm italic m-2">
+          {{ __('By') }} 
+          {{ $comment->user->nickname }}
+          {{ __('on') }} 
+          {{ $comment->created_at->format('l j F Y H:i:s') }}
+        </div>
+        <hr class="my-2">
+      @endforeach
+      <form action="{{ route('images.comment', $image->id) }}" method="post">
+        @csrf
+        <textarea
+          class="h-24 border border-gray-400 rounded w-full p-2"
+          placeholder="{{ __('Write your comment') }}"
+          name="comment"></textarea>
+        <button class="bg-green-700 mt-8 p-4 border-2 border-white text-white rounded-lg" type="submit">
+          {{ __('Send comment') }}
+        </button>
+      </form>
+    </div>
   </div>
   @if ($image->user->id === Auth::user()->id)
-    <div class=my-4>
+    <div class="my-4">
       <a class="bg-green-700 m-2 p-4 border-2 border-white text-white rounded-lg" href="{{ route('users.convertInProfile', $image->id) }}">
         {{ __('Convert in profile picture') }}
       </a>

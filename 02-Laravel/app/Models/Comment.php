@@ -9,6 +9,8 @@ class Comment extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
+        'image_id',
         'content',
     ];
 
@@ -23,10 +25,10 @@ class Comment extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function image() {
-        return $this->belongsTo('App\Image');
+        return $this->belongsTo('App\Models\Image');
     }
 }

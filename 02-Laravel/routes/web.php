@@ -30,4 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/images/{id}/get', 'App\Http\Controllers\ImagesController@get')->name('images.get');
 
   Route::get('likes/{imageId}', 'App\Http\Controllers\LikeController@store')->name('like');
+
+  Route::post('images/{imageId}/comment', 'App\Http\Controllers\ImagesController@comment')->name('images.comment');
 });
