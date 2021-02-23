@@ -14,15 +14,15 @@ export default class extends Controller {
   async likeAction () {
     try {
       const response = await fetch(this.urlValue);
+      const payload = await response.json()
       this.iconTarget.classList.toggle('hidden')
       if (this.textTarget.innerText === 'Like') {
         this.textTarget.innerText = 'Unlike'
-        this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) + 1
       } else {
         this.textTarget.innerText = 'Like'
-        this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) - 1
       }
-      this.pluralTarget.innerText = parseInt(this.conteoTarget.innerText, 10) === 1 ? 'like' : 'likes'
+      this.conteoTarget.innerText = payload.likes
+      this.pluralTarget.innerText = payload.likes === 1 ? 'like' : 'likes'
     } catch (e) {
       console.error(e);
     }

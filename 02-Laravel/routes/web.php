@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('images', 'App\Http\Controllers\ImagesController');
   Route::get('/images/{id}/get', 'App\Http\Controllers\ImagesController@get')->name('images.get');
 
-  Route::get('likes/{imageId}', 'App\Http\Controllers\LikeController@store')->name('like');
+  Route::get('images/{imageId}/like', 'App\Http\Controllers\ImagesController@like')->name('images.like');
 
   Route::post('images/{imageId}/comment', 'App\Http\Controllers\ImagesController@comment')->name('images.comment');
 });

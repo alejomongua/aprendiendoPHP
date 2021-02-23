@@ -4953,7 +4953,7 @@ var _default = /*#__PURE__*/function (_Controller) {
     key: "likeAction",
     value: function () {
       var _likeAction = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
+        var response, payload;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -4964,31 +4964,35 @@ var _default = /*#__PURE__*/function (_Controller) {
 
               case 3:
                 response = _context.sent;
+                _context.next = 6;
+                return response.json();
+
+              case 6:
+                payload = _context.sent;
                 this.iconTarget.classList.toggle('hidden');
 
                 if (this.textTarget.innerText === 'Like') {
                   this.textTarget.innerText = 'Unlike';
-                  this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) + 1;
                 } else {
                   this.textTarget.innerText = 'Like';
-                  this.conteoTarget.innerText = parseInt(this.conteoTarget.innerText, 10) - 1;
                 }
 
-                this.pluralTarget.innerText = parseInt(this.conteoTarget.innerText, 10) === 1 ? 'like' : 'likes';
-                _context.next = 12;
+                this.conteoTarget.innerText = payload.likes;
+                this.pluralTarget.innerText = payload.likes === 1 ? 'like' : 'likes';
+                _context.next = 16;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 12:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 9]]);
+        }, _callee, this, [[0, 13]]);
       }));
 
       function likeAction() {

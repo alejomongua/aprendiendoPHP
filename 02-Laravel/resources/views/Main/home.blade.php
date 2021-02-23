@@ -20,7 +20,7 @@
 
   <div class="w-1/2 m-auto">
     @foreach ($images as $image)
-      <div class="bordered border-gray-400 m-4 p-4 bg-gray-200 text-gray-700" data-controller="like" data-like-url-value='{{ route('like', $image->id) }}'>
+      <div class="bordered border-gray-400 m-4 p-4 bg-gray-200 text-gray-700" data-controller="like" data-like-url-value='{{ route('images.like', $image->id) }}'>
         <div class="h-16 m-2">
           <a href="{{ route('users.show', $image->user->id) }}">
             @if ($image->user->profile_image_id)
@@ -46,13 +46,7 @@
           </div>
         </a>
 
-        <div class="font-thin my-4 inline">
-          <a class="bg-green-700 m-8 p-4 border-2 border-white text-white rounded-lg" href="{{ route('images.create') }}">
-            {{ __('Comment') }}
-          </a>
-        </div>
-
-        <span class="inline m-4">{{ $image->comments->count() }} {{ $image->likes->count() === 1 ? __('Comment') : __('Comments') }}</span>
+        <span class="inline m-4">{{ $image->comments->count() }} {{ $image->comments->count() === 1 ? __('Comment') : __('Comments') }}</span>
 
         <span class="text-red-500 cursor-pointer" data-action="click->like#likeAction">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="m-4 inline" viewBox="0 0 16 16">
