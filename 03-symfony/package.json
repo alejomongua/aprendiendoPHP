@@ -1,0 +1,25 @@
+{
+  "name": "03-symfony",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.1.1",
+    "autoprefixer": "^10.2.4",
+    "eslint": "^7.20.0",
+    "postcss-loader": "^5.0.0",
+    "tailwindcss": "^2.0.3"
+  }
+}
