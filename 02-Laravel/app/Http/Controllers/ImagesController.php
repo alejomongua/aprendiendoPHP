@@ -122,30 +122,20 @@ class ImagesController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function get(Request $request, int $imageId) {
-        $image = Image::find($imageId);
-        if (!$image) {
-            return abort(404);
-        }
-
+    public function get(Image $image) {
         $file = Storage::disk('images')->get($image->path);
         $response = new Response($file, 200);
         return $response->header('Content-Type', $image->mimetype);
     }
 
-    public function comment(Request $request, int $imageId) {
+    public function comment(Request $request, Image $image) {
         $this->validate($request, [
             'comment' => 'required|string',
         ]);
 
-        $image = Image::find($imageId);
-        if (!$image) {
-            return abort(404);
-        }
-
         $comment = Comment::create([
             'user_id' => $request->user()->id,
-            'image_id' => $imageId,
+            'image_id' => $image->id,
             'content' => $request->input('comment'),
         ]);
 
@@ -160,16 +150,11 @@ class ImagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function like(Request $request, int $imageId)
+    public function like(Image $image)
     {
-        $image = Image::find($imageId);
-        if (!$image) {
-            return abort(404);
-        }
-
         $like = Like::where([
             'user_id' => Auth::user()->id,
-            'image_id' => $imageId,
+            'image_id' => $image->id,
         ]);
 
         if ($like->count() > 0) {
@@ -177,7 +162,7 @@ class ImagesController extends Controller
         } else {
             $like = Like::create([
                 'user_id' => Auth::user()->id,
-                'image_id' => $imageId,
+                'image_id' => $image->id,
             ]);
         }
 

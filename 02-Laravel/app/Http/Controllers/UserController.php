@@ -127,16 +127,14 @@ class UserController extends Controller
                          ->with(['success' => __('Data updated successfully')]);
     }
 
-    public function convertInProfile(Request $request, int $imageId) {
-        $currentUser = $request->user();
-        
-        $image = Image::find($imageId);
+    public function convertInProfile(Image $image) {
+        $currentUser = \Auth::user();
 
-        if (!$image || $image->user_id !== $currentUser->id) {
-            return abort(404);
+        if ($image->user_id !== $currentUser->id) {
+            abort(404);
         }
 
-        $currentUser->profile_image_id = $imageId;
+        $currentUser->profile_image_id = $image->id;
 
         $currentUser->update();
         return redirect()->route('viewMyProfile')

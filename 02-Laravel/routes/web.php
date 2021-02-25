@@ -24,12 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
   Route::resource('users', 'App\Http\Controllers\UserController');
   Route::get('/edit-my-profile', 'App\Http\Controllers\UserController@editMyProfile')->name('editMyProfile');
   Route::get('/view-my-profile', 'App\Http\Controllers\UserController@viewMyProfile')->name('viewMyProfile');
-  Route::get('/users/{image_id}/convert-in-profile', 'App\Http\Controllers\UserController@convertInProfile')->name('users.convertInProfile');
+  Route::get('/users/{image}/convert-in-profile', 'App\Http\Controllers\UserController@convertInProfile')->name('users.convertInProfile');
 
   Route::resource('images', 'App\Http\Controllers\ImagesController');
-  Route::get('/images/{id}/get', 'App\Http\Controllers\ImagesController@get')->name('images.get');
+  Route::get('/images/{image}/get', 'App\Http\Controllers\ImagesController@get')->name('images.get');
 
-  Route::get('images/{imageId}/like', 'App\Http\Controllers\ImagesController@like')->name('images.like');
+  Route::get('images/{image}/like', 'App\Http\Controllers\ImagesController@like')->name('images.like');
 
-  Route::post('images/{imageId}/comment', 'App\Http\Controllers\ImagesController@comment')->name('images.comment');
+  Route::post('images/{image}/comment', 'App\Http\Controllers\ImagesController@comment')->name('images.comment');
 });
