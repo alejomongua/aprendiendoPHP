@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Proyectos{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -13,7 +13,62 @@
             {{ encore_entry_script_tags('js/app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-green-50">
+        <!-- navbar -->
+        <nav class="w-full bg-green-600 border-b-2 border-green-900 py-4">
+            <div class="container mx-auto sm:px-6 lg:px-8 text-gray-100">
+                <div class="flex justify-between">
+                    <div>
+                        <a href="{{ path('index') }}" class="font-extralight text-xl">
+                            Proyectos
+                        </a>
+                    </div>
+                    {% if app.user %}
+                        <div>
+                            <span>
+                                Hola {{ app.user.username }}, 
+                            </span>
+                            <a href="{{ path('app_logout') }}" class="font-bold">
+                                Cerrar sesión
+                            </a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{{ path('app_login') }}" class="font-bold">
+                                Identificarse
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <!-- endnavbar -->
+
+        <!-- flash -->
+        {% if error is defined and error %}
+            <div class="bg-red-300 text-red-700 border-b-2 rounded border-red-700 py-4">
+                <div class='container mx-auto'>
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            </div>
+        {% endif %}
+        {% if flashError is defined %}
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="bg-red-300 text-red-700 border-b-2 rounded border-red-700 py-4">
+                    <div class='container mx-auto'>
+                        {{ flashError }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- endflash -->
         {% block body %}{% endblock %}
+
+        <footer class="bg-green-900 text-green-50 mt-2 py-4">
+            <div class="container mx-auto">
+                Desarrollado por <a href="https://www.linkedin.com/in/luis-alejandro-mongua-5087651ba/" target="_blank">Alejandro Mongua</a> usando <a href="https://symfony.com/" target="_blank">Symfony Framework</a>
+            </div>
+        </footer>
     </body>
 </html>

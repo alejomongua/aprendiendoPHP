@@ -20,34 +20,38 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'label' => 'Nombre de usuario',
                 'label_attr' => [
-                    'class' => 'text-right px-2 leading-10'
+                    'class' => 'block m-4 leading-10'
                 ],
                 'attr' => [
                     'class' => 'border-2 rounded shadow border-gray-700 p-2'
                 ],
                 'row_attr' => [
-                    'class' => 'my-4 font-semibold grid grid-cols-2'
+                    'class' => 'mx-4 font-semibold'
                 ],
             ])
             ->add('email', EmailType::class, [
+                'label' => 'Correo electrónico',
                 'label_attr' => [
-                    'class' => 'text-right px-2 leading-10'
+                    'class' => 'block m-4 leading-10'
                 ],
                 'attr' => [
                     'class' => 'border-2 rounded shadow border-gray-700 p-2'
                 ],
                 'row_attr' => [
-                    'class' => 'my-4 font-semibold grid grid-cols-2'
+                    'class' => 'mx-4 font-semibold'
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Debe aceptar los términos y condiciones.',
                     ]),
                 ],
+                'label' => 'Acepto los <a class="text-blue-600" href="/terminos-y-condiciones" target="_blank">términos y condiciones</a>',
+                'label_html' => true,
                 'row_attr' => [
                     'class' => 'text-center mb-3'
                 ],
@@ -61,23 +65,23 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Por favor ingrese una contraseña',
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Su contraseña debe ser de al menos {{ limit }} caracteres',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
                 'label_attr' => [
-                    'class' => 'text-right px-2 leading-10'
+                    'class' => 'block m-4 leading-10'
                 ],
                 'attr' => [
                     'class' => 'border-2 rounded shadow border-gray-700 p-2'
                 ],
                 'row_attr' => [
-                    'class' => 'my-4 font-semibold grid grid-cols-2'
+                    'class' => 'mx-4 font-semibold'
                 ],
             ])
         ;
