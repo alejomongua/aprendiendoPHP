@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Proyectos{% endblock %}
+{% block title %}Proyectos y tareas{% endblock %}
 
 {% block body %}
 
-<div class="container mx-auto">
+<div class="container mx-auto my-4">
     <h1 class="text-4xl leading-10 text-green-900 font-light p-4">
-        Mis proyectos
+        Proyectos y tareas
     </h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/archive/Personal/curso/03-symfony/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/archive/Personal/curso/03-symfony/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+    <div "font-light text-lg leading-8">
+        Esta aplicación permite llevar control de los proyectos y las tareas
+    </div>
+
+    {% if not app.user %}
+        <div class="p-4 my-6 flex inline-flex">
+            <a href="{{ path('app_login') }}" class="text-2xl m-4 p-4 bg-green-900 text-green-50">
+                Identificarse
+            </a>
+            <a href="{{ path('app_register') }}" class="text-2xl m-4 p-4 bg-green-900 text-green-50">
+                Registrarse
+            </a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
