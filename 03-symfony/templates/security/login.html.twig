@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<div class="container mx-auto">
+<div class="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 p-10 mx-auto border bg-green-50 border-green-900 rounded shadow my-10">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -16,13 +16,13 @@
             </div>
         {% endif %}
 
-        <h1 class="text-2xl leading-10">Please sign in</h1>
-        <div class="my-4 font-semibold grid grid-cols-2">
-            <label for="inputUsername" class="text-right px-2 leading-10">Username</label>
+        <h1 class="text-2xl leading-10 text-green-900">Please sign in</h1>
+        <div class="my-4 font-semibold">
+            <label for="inputUsername" class="block m-4 leading-10">Username</label>
             <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="border-2 rounded shadow border-gray-700 p-2" required autofocus>
         </div>
-        <div class="my-4 font-semibold grid grid-cols-2">
-            <label for="inputPassword" class="text-right px-2 leading-10">Password</label>
+        <div class="my-4 font-semibold">
+            <label for="inputPassword" class="block px-2 leading-10">Password</label>
             <input type="password" name="password" id="inputPassword" class="border-2 rounded shadow border-gray-700 p-2" required>
         </div>
         <input type="hidden" name="_csrf_token"
