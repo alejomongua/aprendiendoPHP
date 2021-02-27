@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,13 +19,40 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
+            ->add('username', TextType::class, [
+                'label_attr' => [
+                    'class' => 'text-right px-2 leading-10'
+                ],
+                'attr' => [
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2'
+                ],
+                'row_attr' => [
+                    'class' => 'my-4 font-semibold grid grid-cols-2'
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'label_attr' => [
+                    'class' => 'text-right px-2 leading-10'
+                ],
+                'attr' => [
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2'
+                ],
+                'row_attr' => [
+                    'class' => 'my-4 font-semibold grid grid-cols-2'
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
                     ]),
+                ],
+                'row_attr' => [
+                    'class' => 'text-center mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'font-semibold text-lg mx-4'
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
@@ -35,11 +64,20 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Please enter a password',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 8,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                ],
+                'label_attr' => [
+                    'class' => 'text-right px-2 leading-10'
+                ],
+                'attr' => [
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2'
+                ],
+                'row_attr' => [
+                    'class' => 'my-4 font-semibold grid grid-cols-2'
                 ],
             ])
         ;
