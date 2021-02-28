@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -47,6 +49,16 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Proyecto::class, mappedBy="generado_por_id", orphanRemoval=true)
+     */
+    private $proyectos;
+
+    public function __construct()
+    {
+        $this->proyectos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,6 +162,36 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Proyecto[]
+     */
+    public function getProyectos(): Collection
+    {
+        return $this->proyectos;
+    }
+
+    public function addProyecto(Proyecto $proyecto): self
+    {
+        if (!$this->proyectos->contains($proyecto)) {
+            $this->proyectos[] = $proyecto;
+            $proyecto->setGeneradoPorId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProyecto(Proyecto $proyecto): self
+    {
+        if ($this->proyectos->removeElement($proyecto)) {
+            // set the owning side to null (unless already changed)
+            if ($proyecto->getGeneradoPorId() === $this) {
+                $proyecto->setGeneradoPorId(null);
+            }
+        }
 
         return $this;
     }
