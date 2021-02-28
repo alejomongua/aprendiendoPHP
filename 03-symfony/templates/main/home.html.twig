@@ -9,10 +9,17 @@
         Mis proyectos
     </h1>
 
-    <div>TO DO: Lista de proyectos</div>
+    {% if app.user.isVerified %}
+        <div>TO DO: Lista de proyectos</div>
 
-    <button>
-      Empezar un proyecto nuevo
-    </button>
+        <button>
+        Empezar un proyecto nuevo
+        </button>
+    {% else %}
+        <div class="font-light bg-red-100 border border-red-900 text-red-900 text-4xl p-4 text-center">
+            <p>Por favor verifique su correo electrónico para poder usar la aplicación. Las instrucciones se enviaron a la dirección registrada</p>
+            <a href="{{ path('app_resend_verify_email') }}" class="font-bold text-blue-400"> Volver a enviar</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -55,15 +55,21 @@
                 </div>
             </div>
         {% endif %}
-        {% if flashError is defined %}
-            {% for flashError in app.flashes('verify_email_error') %}
-                <div class="bg-red-300 text-red-700 border-b-2 rounded border-red-700 py-4">
-                    <div class='container mx-auto'>
-                        {{ flashError }}
-                    </div>
+        {% for message in app.flashes('success') %}
+            <div class="bg-green-300 text-green-700 border-b-2 rounded border-green-700 py-4">
+                <div class='container mx-auto'>
+                    {{ message }}
                 </div>
-            {% endfor %}
-        {% endif %}
+            </div>
+        {% endfor %}
+        {% for flashError in app.flashes('error') %}
+            <div class="bg-red-300 text-red-700 border-b-2 rounded border-red-700 py-4">
+                <div class='container mx-auto'>
+                    {{ flashError }}
+                </div>
+            </div>
+        {% endfor %}
+
 
         <!-- endflash -->
         {% block body %}{% endblock %}
