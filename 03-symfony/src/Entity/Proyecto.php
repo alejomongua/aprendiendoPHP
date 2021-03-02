@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProyectoRepository::class)
+ * @ORM\Table(name="`proyecto`")
  */
 class Proyecto
 {
@@ -41,7 +42,7 @@ class Proyecto
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="proyectos")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $generado_por_id;
+    private $generado_por;
 
     public function getId(): ?int
     {
@@ -98,12 +99,12 @@ class Proyecto
 
     public function getGeneradoPorId(): ?User
     {
-        return $this->generado_por_id;
+        return $this->generado_por;
     }
 
-    public function setGeneradoPorId(?User $generado_por_id): self
+    public function setGeneradoPorId(?User $generado_por): self
     {
-        $this->generado_por_id = $generado_por_id;
+        $this->generado_por = $generado_por;
 
         return $this;
     }

@@ -51,7 +51,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\OneToMany(targetEntity=Proyecto::class, mappedBy="generado_por_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Proyecto::class, mappedBy="generado_por", orphanRemoval=true)
      */
     private $proyectos;
 
