@@ -1,4 +1,4 @@
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
 
 Encore
   .setOutputPath('public/build/')
@@ -6,8 +6,9 @@ Encore
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
+  .enableTypeScriptLoader()
 
-  .addEntry('js/app', './assets/js/app.js') // your js entry file
+  .addEntry('js/app', './assets/js/app.ts') // your js entry file
   .addStyleEntry('css/app', './assets/css/app.css') // your less/scss entry file
 
   .enablePostCssLoader()
