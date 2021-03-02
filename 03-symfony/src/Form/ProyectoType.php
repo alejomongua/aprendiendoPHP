@@ -16,7 +16,6 @@ class ProyectoType extends AbstractType
             ->add('fin')
             ->add('estado')
             ->add('descripcion')
-            ->add('generado_por')
         ;
     }
 

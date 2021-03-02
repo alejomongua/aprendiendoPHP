@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -49,6 +50,20 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var datetime $updated
+     * 
+     * @ORM\Column(type="datetime", nullable = true)
+     */
+    protected $updated;
 
     /**
      * @ORM\OneToMany(targetEntity=Proyecto::class, mappedBy="generado_por", orphanRemoval=true)
@@ -178,7 +193,7 @@ class User implements UserInterface
     {
         if (!$this->proyectos->contains($proyecto)) {
             $this->proyectos[] = $proyecto;
-            $proyecto->setGeneradoPorId($this);
+            $proyecto->setGeneradoPor($this);
         }
 
         return $this;
@@ -188,11 +203,36 @@ class User implements UserInterface
     {
         if ($this->proyectos->removeElement($proyecto)) {
             // set the owning side to null (unless already changed)
-            if ($proyecto->getGeneradoPorId() === $this) {
-                $proyecto->setGeneradoPorId(null);
+            if ($proyecto->getGeneradoPor() === $this) {
+                $proyecto->setGeneradoPor(null);
             }
         }
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->username;
+    }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime("now");
+    }
+
 }

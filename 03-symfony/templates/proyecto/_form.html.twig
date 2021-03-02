@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.inicio) }}
+    {{ form_row(form.fin) }}
+    {{ form_row(form.estado) }}
+
+
+    <button type="submit" class="my-4 p-4 border rounded shadow bg-blue-300">
+        {{ button_label|default('Guardar') }}
+    </button>
 {{ form_end(form) }}

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ProyectoRepository::class)
  * @ORM\Table(name="`proyecto`")
+ * @ORM\HasLifecycleCallbacks
  */
 class Proyecto
 {
@@ -43,6 +44,20 @@ class Proyecto
      * @ORM\JoinColumn(nullable=false)
      */
     private $generado_por;
+
+    /**
+     * @var datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var datetime $updated
+     * 
+     * @ORM\Column(type="datetime", nullable = true)
+     */
+    protected $updated;
 
     public function getId(): ?int
     {
@@ -97,15 +112,36 @@ class Proyecto
         return $this;
     }
 
-    public function getGeneradoPorId(): ?User
+    public function getGeneradoPor(): ?User
     {
         return $this->generado_por;
     }
 
-    public function setGeneradoPorId(?User $generado_por): self
+    public function setGeneradoPor(?User $generado_por): self
     {
         $this->generado_por = $generado_por;
 
         return $this;
     }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime("now");
+    }
+
 }
