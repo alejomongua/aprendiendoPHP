@@ -1,10 +1,57 @@
 {{ form_start(form) }}
-    {{ form_row(form.inicio) }}
-    {{ form_row(form.fin) }}
-    {{ form_row(form.estado) }}
+    <h2 class="my-2 font-bold">Inicio del proyecto</h2>
+    <div id="selectorInicio">
+        <div class="m-auto p-2 border bg-gray-50 rounded shadow">
+            <section class="mx-2 flex justify-center space-x-4">
+                <h2 class="font-bold currentMonth">Marzo</h2>
+                <h2 class="font-bold currentYear">2021</h2>
+            </section>
+            <section class="flex my-2 justify-between">
+                {% for day in ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] %}
+                    <p class="text-center">
+                        {{ day }}
+                    </p>
+                {% endfor %}
+            </section>
+            <section class="grid grid-cols-7 calendar">
+                {% for day in 1..31 %}
+                    <p class="text-center">
+                        {{ day}}
+                    </p>
+                {% endfor %}
+            </section>
+            <section class="flex justify-between mt-2">
+                <button class="px-2 border rounded" @click="prev">Anterior</button>
+                <button class="px-2 border rounded" @click="next">Siguiente</button>
+            </section>
+        </div>
+    </div>
+    <h2 class="my-2 font-bold">Fin presupuestado del proyecto</h2>
+    <div id="selectorFin">
+        <div class="m-auto p-2 border bg-gray-50 rounded shadow">
+            <section class="mx-2 flex justify-center space-x-4">
+                <h2 class="font-bold currentMonth">Marzo</h2>
+                <h2 class="font-bold currentYear">2021</h2>
+            </section>
+            <section class="flex my-2 justify-between">
+                {% for day in ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] %}
+                    <p class="text-center">
+                        {{ day }}
+                    </p>
+                {% endfor %}
+            </section>
+            <section class="grid grid-cols-7 calendar">
+                {% for day in 1..31 %}
+                    <p class="text-center">
+                        {{ day}}
+                    </p>
+                {% endfor %}
+            </section>
+            <section class="flex justify-between mt-2">
+                <button class="px-2 border rounded" @click="prev">Anterior</button>
+                <button class="px-2 border rounded" @click="next">Siguiente</button>
+            </section>
+        </div>
+    </div>
 
-
-    <button type="submit" class="my-4 p-4 border rounded shadow bg-blue-300">
-        {{ button_label|default('Guardar') }}
-    </button>
 {{ form_end(form) }}

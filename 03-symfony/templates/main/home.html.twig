@@ -12,9 +12,11 @@
     {% if app.user.isVerified %}
         <div>TO DO: Lista de proyectos</div>
 
-        <button>
-        Empezar un proyecto nuevo
-        </button>
+        <div class="my-4">
+            <a href="{{ path('proyecto_index') }}" class="my-4 p-4 border rounded shadow bg-green-300">
+                Ir a la lista de proyectos
+            </a>
+        </div>
     {% else %}
         <div class="font-light bg-red-100 border border-red-900 text-red-900 text-4xl p-4 text-center">
             <p>Por favor verifique su correo electrónico para poder usar la aplicación. Las instrucciones se enviaron a la dirección registrada</p>
