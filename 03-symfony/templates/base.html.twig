@@ -13,7 +13,7 @@
             {{ encore_entry_script_tags('js/app') }}
         {% endblock %}
     </head>
-    <body class="bg-green-50">
+    <body class="bg-green-50" data-javascript="{{ javascript|default('') }}">
         <!-- navbar -->
         <nav class="w-full bg-green-600 border-b-2 border-green-900 py-4">
             <div class="container mx-auto sm:px-6 lg:px-8 text-gray-100">

@@ -45,6 +45,7 @@ class ProyectoController extends AbstractController
         return $this->render('proyecto/new.html.twig', [
             'proyecto' => $proyecto,
             'form' => $form->createView(),
+            'javascript' => 'proyectoNew',
         ]);
     }
 

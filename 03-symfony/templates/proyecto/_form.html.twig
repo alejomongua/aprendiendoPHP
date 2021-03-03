@@ -15,14 +15,14 @@
             </section>
             <section class="grid grid-cols-7 calendar">
                 {% for day in 1..31 %}
-                    <p class="text-center">
-                        {{ day}}
+                    <p class="text-center dia" data-dia={{ day }}>
+                        {{ day }}
                     </p>
                 {% endfor %}
             </section>
             <section class="flex justify-between mt-2">
-                <button class="px-2 border rounded" @click="prev">Anterior</button>
-                <button class="px-2 border rounded" @click="next">Siguiente</button>
+                <button class="px-2 border rounded mesAnterior" type="button">Anterior</button>
+                <button class="px-2 border rounded mesSiguiente" type="button">Siguiente</button>
             </section>
         </div>
     </div>
@@ -42,14 +42,14 @@
             </section>
             <section class="grid grid-cols-7 calendar">
                 {% for day in 1..31 %}
-                    <p class="text-center">
-                        {{ day}}
+                    <p class="text-center dia" data-dia={{ day }}>
+                        {{ day }}
                     </p>
                 {% endfor %}
             </section>
             <section class="flex justify-between mt-2">
-                <button class="px-2 border rounded" @click="prev">Anterior</button>
-                <button class="px-2 border rounded" @click="next">Siguiente</button>
+                <button class="px-2 border rounded mesAnterior" type="button">Anterior</button>
+                <button class="px-2 border rounded mesSiguiente" type="button">Siguiente</button>
             </section>
         </div>
     </div>
