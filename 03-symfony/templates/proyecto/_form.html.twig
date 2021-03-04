@@ -3,8 +3,8 @@
     <div id="selectorInicio">
         <div class="m-auto p-2 border bg-gray-50 rounded shadow">
             <section class="mx-2 flex justify-center space-x-4">
-                <h2 class="font-bold currentMonth">Marzo</h2>
-                <h2 class="font-bold currentYear">2021</h2>
+                <h2 class="font-bold currentMonth"></h2>
+                <h2 class="font-bold currentYear"></h2>
             </section>
             <section class="flex my-2 justify-between">
                 {% for day in ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] %}
@@ -14,11 +14,6 @@
                 {% endfor %}
             </section>
             <section class="grid grid-cols-7 calendar">
-                {% for day in 1..31 %}
-                    <p class="text-center dia" data-dia={{ day }}>
-                        {{ day }}
-                    </p>
-                {% endfor %}
             </section>
             <section class="flex justify-between mt-2">
                 <button class="px-2 border rounded mesAnterior" type="button">Anterior</button>
@@ -30,8 +25,8 @@
     <div id="selectorFin">
         <div class="m-auto p-2 border bg-gray-50 rounded shadow">
             <section class="mx-2 flex justify-center space-x-4">
-                <h2 class="font-bold currentMonth">Marzo</h2>
-                <h2 class="font-bold currentYear">2021</h2>
+                <h2 class="font-bold currentMonth"></h2>
+                <h2 class="font-bold currentYear"></h2>
             </section>
             <section class="flex my-2 justify-between">
                 {% for day in ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] %}
@@ -41,11 +36,6 @@
                 {% endfor %}
             </section>
             <section class="grid grid-cols-7 calendar">
-                {% for day in 1..31 %}
-                    <p class="text-center dia" data-dia={{ day }}>
-                        {{ day }}
-                    </p>
-                {% endfor %}
             </section>
             <section class="flex justify-between mt-2">
                 <button class="px-2 border rounded mesAnterior" type="button">Anterior</button>
