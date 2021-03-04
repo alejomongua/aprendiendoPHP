@@ -12,6 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Proyecto
 {
+    const ESTADOS = [
+        'Creado' => 'Creado',
+        'En proceso' => 'En proceso',
+        'En pausa' => 'En pausa',
+        'Cerrado' => 'Cerrado',
+        'Abortado' => 'Abortado',
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

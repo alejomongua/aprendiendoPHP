@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,12 +19,13 @@ class ProyectoType extends AbstractType
         $builder
             ->add('inicio', HiddenType::class)
             ->add('fin', HiddenType::class)
-            ->add('estado', TextType::class, [
+            ->add('estado', ChoiceType::class, [
+                'choices'  => Proyecto::ESTADOS,
                 'label_attr' => [
                     'class' => 'block m-4 leading-10'
                 ],
                 'attr' => [
-                    'class' => 'border-2 rounded shadow border-gray-700 p-2'
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2 w-full'
                 ],
                 'row_attr' => [
                     'class' => 'mx-4 font-semibold'
