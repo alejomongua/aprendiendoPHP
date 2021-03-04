@@ -42,6 +42,11 @@ class Proyecto
     private $estado;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titulo;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
@@ -91,6 +96,18 @@ class Proyecto
     public function setFin(?\DateTimeInterface $fin): self
     {
         $this->fin = $fin;
+
+        return $this;
+    }
+
+    public function getTitulo(): ?string
+    {
+        return $this->titulo;
+    }
+
+    public function setTitulo(string $titulo): self
+    {
+        $this->titulo = $titulo;
 
         return $this;
     }

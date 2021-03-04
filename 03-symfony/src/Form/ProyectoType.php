@@ -17,6 +17,17 @@ class ProyectoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('titulo', TextType::class, [
+                'label_attr' => [
+                    'class' => 'block m-4 leading-10'
+                ],
+                'attr' => [
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2 w-full'
+                ],
+                'row_attr' => [
+                    'class' => 'mx-4 font-semibold'
+                ],
+            ])
             ->add('inicio', HiddenType::class)
             ->add('fin', HiddenType::class)
             ->add('estado', ChoiceType::class, [
