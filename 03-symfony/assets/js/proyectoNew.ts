@@ -145,6 +145,4 @@ export class SelectorFecha {
 }
 
 export default () => {
-    const selectorInicio = new SelectorFecha('proyecto_inicio', 'selectorInicio')
-    const selectorFin = new SelectorFecha('proyecto_fin', 'selectorFin')
 }
