@@ -1,58 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tarea{% endblock %}
+{% block title %}{{tarea.titulo}}{% endblock %}
 
 {% block body %}
-    <h1>Tarea</h1>
+<div class="container mx-auto my-4">
+    <h1 class="text-4xl leading-10 text-green-900 font-light p-4">
+        {{ proyecto.titulo }} : {{ tarea.titulo }}
+    </h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ tarea.id }}</td>
-            </tr>
-            <tr>
-                <th>Titulo</th>
-                <td>{{ tarea.titulo }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ tarea.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Inicio</th>
-                <td>{{ tarea.inicio ? tarea.inicio|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Fin</th>
-                <td>{{ tarea.fin ? tarea.fin|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Tipo</th>
-                <td>{{ tarea.tipo }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ tarea.estado }}</td>
-            </tr>
-            <tr>
-                <th>Progreso</th>
-                <td>{{ tarea.progreso }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ tarea.created ? tarea.created|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{{ tarea.updated ? tarea.updated|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('tarea_index', {'proyecto': proyecto.id}) }}">back to list</a>
+    <h2 class="text-xl leading-10 text-green-900 font-light p-4">
+        Información de la tarea
+    </h2>
 
-    <a href="{{ path('tarea_edit', {'id': tarea.id, 'proyecto': proyecto.id}) }}">edit</a>
+    <div class="grid grid-cols-2">
+        {% if tarea.padre %}
+            <div class="font-bold p-4 text-right">
+                Depende de
+            </div>
+            <div class="p-4">
+                <a class="text-blue-400 font-bold" href="{{ path('tarea_show', {'id': tarea.padre.id, 'proyecto': tarea.padre.proyecto.id}) }}">
+                    {{ tarea.padre.titulo }}
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="font-bold p-4 text-right">
+            Generada por
+        </div>
+        <div class="p-4">
+            {{ tarea.generadoPor.username }}
+        </div>
+
+        {% if tarea.inicio %}
+            <div class="font-bold p-4 text-right">
+                Fecha de inicio
+            </div>
+            <div class="p-4">
+                {{ tarea.inicio|date('l d F Y') }}
+            </div>
+        {% endif %}
+
+        {% if tarea.fin %}
+            <div class="font-bold p-4 text-right">
+                {{ tarea.fin <= "now"|date("m/d/Y") ? 'Fecha de finalización' : 'Fecha estimada de finalización' }}
+            </div>
+            <div class="p-4">
+                {{ tarea.fin|date('l d F Y') }}
+            </div>
+        {% endif %}
+
+        <div class="font-bold p-4 text-right">
+            Estado
+        </div>
+        <div class="p-4">
+            {{ tarea.estado }}
+        </div>
+
+        <div class="font-bold p-4 text-right">
+            Tipo de tarea
+        </div>
+        <div class="p-4">
+            {{ tarea.tipo }}
+        </div>
+
+        <div class="font-bold p-4 text-right">
+            Progreso
+        </div>
+        <div class="p-4">
+            {{ tarea.progreso | default(0) }} %
+        </div>
+
+        {% if tarea.descripcion %}
+            <div class="font-bold p-4 text-right">
+                Descripcion
+            </div>
+            <div class="p-4">
+                {{ tarea.descripcion }}
+            </div>
+        {% endif %}
+
+        <div class="font-bold p-4 text-right">
+            Creado en
+        </div>
+        <div class="p-4">
+            {{ tarea.created|date("m/d/Y g:i a") }}
+        </div>
+
+        {% if tarea.created != tarea.updated %}
+            <div class="font-bold p-4 text-right">
+                Actualizado en
+            </div>
+            <div class="p-4">
+                {{ tarea.updated|date("m/d/Y g:i a") }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="my-4">
+        <a href="{{ path('tarea_index', {'proyecto': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300">
+            Ir a la lista de tareas
+        </a>
+    </div>
+
+
+    <div class="mt-8">
+        <a href="{{ path('tarea_edit', {'id': tarea.id, 'proyecto': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300">
+            Editar esta tarea
+        </a>
+    </div>
 
     {{ include('tarea/_delete_form.html.twig') }}
+</div>
 {% endblock %}

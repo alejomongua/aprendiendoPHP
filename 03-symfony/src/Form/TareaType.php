@@ -110,11 +110,14 @@ class TareaType extends AbstractType
                     'class' => 'block m-4 leading-10'
                 ],
                 'attr' => [
-                    'class' => 'border-2 rounded shadow border-gray-700 p-2 w-full'
+                    'class' => 'border-2 rounded shadow border-gray-700 p-2 w-full placeholder-gray-500 placeholder-opacity-50'
                 ],
                 'row_attr' => [
                     'class' => 'mx-4 font-semibold'
                 ],
+                'required' => false,
+                'placeholder' => '--',
+                'empty_data' => null,
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [

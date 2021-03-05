@@ -1,51 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tarea index{% endblock %}
+{% block title %}Tareas de {{ proyecto.titulo }}{% endblock %}
 
 {% block body %}
-    <h1>Tarea index</h1>
+<div class="container mx-auto my-4">
+    <h1 class="text-4xl leading-10 text-green-900 font-light p-4">
+        Listado de tareas de {{ proyecto.titulo }}
+    </h1>
+</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titulo</th>
-                <th>Descripcion</th>
-                <th>Inicio</th>
-                <th>Fin</th>
-                <th>Tipo</th>
-                <th>Estado</th>
-                <th>Progreso</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>actions</th>
+<div class="mx-auto container">
+    <table class="table w-full">
+        <thead class="table-header-group">
+            <tr class="table-row">
+                <th class="table-cell border p-2">Titulo</th>
+                <th class="table-cell border p-2">Estado</th>
+                <th class="table-cell border p-2">Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-row-group">
         {% for tarea in tareas %}
-            <tr>
-                <td>{{ tarea.id }}</td>
-                <td>{{ tarea.titulo }}</td>
-                <td>{{ tarea.descripcion }}</td>
-                <td>{{ tarea.inicio ? tarea.inicio|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ tarea.fin ? tarea.fin|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ tarea.tipo }}</td>
-                <td>{{ tarea.estado }}</td>
-                <td>{{ tarea.progreso }}</td>
-                <td>{{ tarea.created ? tarea.created|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ tarea.updated ? tarea.updated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('tarea_show', {'id': tarea.id, 'proyecto': proyecto.id}) }}">show</a>
-                    <a href="{{ path('tarea_edit', {'id': tarea.id, 'proyecto': proyecto.id}) }}">edit</a>
+            <tr class="table-row">
+                <td class="table-cell border p-2">
+                    <a class="text-blue-400 font-bold" href="{{ path('tarea_show', {'id': tarea.id, 'proyecto': proyecto.id}) }}">
+                        {{ tarea.titulo }}
+                    </a>
+                </td>
+                <td class="table-cell border p-2">{{ tarea.estado }}</td>
+                <td class="table-cell border p-2">
+                    <a class="text-blue-400 font-bold" href="{{ path('tarea_edit', {'id': tarea.id, 'proyecto': proyecto.id}) }}">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="11">No hay tareas</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div class="my-10">
+        <a href="{{ path('tarea_new', {'proyecto': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300">
+            Crear una nueva tarea
+        </a>
+    </div>
+</div>
 
-    <a href="{{ path('tarea_new', {'proyecto': proyecto.id}) }}">Create new</a>
 {% endblock %}
