@@ -75,6 +75,7 @@ class ProyectoType extends AbstractType
                 'row_attr' => [
                     'class' => 'mx-4 font-semibold'
                 ],
+                'required' => false,
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [

@@ -148,6 +148,16 @@ class Proyecto
         return $this;
     }
 
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    public function getUpdated(): \DateTime
+    {
+        return $this->updated;
+    }
+
     /**
      * Gets triggered only on insert
 

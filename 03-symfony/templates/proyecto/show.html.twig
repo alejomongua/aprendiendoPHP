@@ -1,38 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Proyecto{% endblock %}
+{% block title %}{{ proyecto.titulo }}{% endblock %}
 
 {% block body %}
-    <h1>Proyecto</h1>
+<div class="container mx-auto my-4">
+    <h1 class="text-4xl leading-10 text-green-900 font-light p-4">
+        {{ proyecto.titulo }}
+    </h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ proyecto.id }}</td>
-            </tr>
-            <tr>
-                <th>Inicio</th>
-                <td>{{ proyecto.inicio ? proyecto.inicio|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Fin</th>
-                <td>{{ proyecto.fin ? proyecto.fin|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ proyecto.estado }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ proyecto.descripcion }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('proyecto_index') }}">back to list</a>
+    <h2 class="text-xl leading-10 text-green-900 font-light p-4">
+        Información del proyecto
+    </h2>
 
-    <a href="{{ path('proyecto_edit', {'id': proyecto.id}) }}">edit</a>
+
+
+    <div class="grid grid-cols-2">
+        <div class="font-bold p-4 text-right">
+            Generado por
+        </div>
+        <div class="p-4">
+            {{ proyecto.generadoPor.username }}
+        </div>
+
+        {% if proyecto.inicio %}
+            <div class="font-bold p-4 text-right">
+                Fecha de inicio
+            </div>
+            <div class="p-4">
+                {{ proyecto.inicio|date('l d F Y') }}
+            </div>
+        {% endif %}
+
+        {% if proyecto.fin %}
+            <div class="font-bold p-4 text-right">
+                {{ proyecto.fin <= "now"|date("m/d/Y") ? 'Fecha de finalización' : 'Fecha estimada de finalización' }}
+            </div>
+            <div class="p-4">
+                {{ proyecto.fin|date('l d F Y') }}
+            </div>
+        {% endif %}
+
+        <div class="font-bold p-4 text-right">
+            Estado
+        </div>
+        <div class="p-4">
+            {{ proyecto.estado }}
+        </div>
+
+        {% if proyecto.descripcion %}
+            <div class="font-bold p-4 text-right">
+                Descripcion
+            </div>
+            <div class="p-4">
+                {{ proyecto.descripcion }}
+            </div>
+        {% endif %}
+
+        <div class="font-bold p-4 text-right">
+            Creado en
+        </div>
+        <div class="p-4">
+            {{ proyecto.created|date("m/d/Y g:i a") }}
+        </div>
+
+        {% if proyecto.created != proyecto.updated %}
+            <div class="font-bold p-4 text-right">
+                Actualizado en
+            </div>
+            <div class="p-4">
+                {{ proyecto.updated|date("m/d/Y g:i a") }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="my-4">
+        <a href="{{ path('proyecto_index') }}" class="my-4 p-4 border rounded shadow bg-green-300">
+            Ir a la lista de proyectos
+        </a>
+    </div>
+
+
+    <div class="mt-8">
+        <a href="{{ path('proyecto_edit', {'id': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300">
+            Editar este proyecto
+        </a>
+    </div>
 
     {{ include('proyecto/_delete_form.html.twig') }}
+</div>
 {% endblock %}
