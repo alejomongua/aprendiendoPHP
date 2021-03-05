@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProyectoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -70,6 +72,16 @@ class Proyecto
      * @ORM\Column(type="datetime", nullable = true)
      */
     protected $updated;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tarea::class, mappedBy="proyecto", orphanRemoval=true)
+     */
+    private $tareas;
+
+    public function __construct()
+    {
+        $this->tareas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -176,6 +188,36 @@ class Proyecto
     public function onPreUpdate()
     {
         $this->updated = new \DateTime("now");
+    }
+
+    /**
+     * @return Collection|Tarea[]
+     */
+    public function getTareas(): Collection
+    {
+        return $this->tareas;
+    }
+
+    public function addTarea(Tarea $tarea): self
+    {
+        if (!$this->tareas->contains($tarea)) {
+            $this->tareas[] = $tarea;
+            $tarea->setProyecto($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarea(Tarea $tarea): self
+    {
+        if ($this->tareas->removeElement($tarea)) {
+            // set the owning side to null (unless already changed)
+            if ($tarea->getProyecto() === $this) {
+                $tarea->setProyecto(null);
+            }
+        }
+
+        return $this;
     }
 
 }

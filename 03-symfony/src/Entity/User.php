@@ -70,9 +70,15 @@ class User implements UserInterface
      */
     private $proyectos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Tarea::class, mappedBy="generado_por", orphanRemoval=true)
+     */
+    private $tareas;
+
     public function __construct()
     {
         $this->proyectos = new ArrayCollection();
+        $this->tareas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +239,36 @@ class User implements UserInterface
     public function onPreUpdate()
     {
         $this->updated = new \DateTime("now");
+    }
+
+    /**
+     * @return Collection|Tarea[]
+     */
+    public function getTareas(): Collection
+    {
+        return $this->tareas;
+    }
+
+    public function addTarea(Tarea $tarea): self
+    {
+        if (!$this->tareas->contains($tarea)) {
+            $this->tareas[] = $tarea;
+            $tarea->setGeneradoPor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarea(Tarea $tarea): self
+    {
+        if ($this->tareas->removeElement($tarea)) {
+            // set the owning side to null (unless already changed)
+            if ($tarea->getGeneradoPor() === $this) {
+                $tarea->setGeneradoPor(null);
+            }
+        }
+
+        return $this;
     }
 
 }
