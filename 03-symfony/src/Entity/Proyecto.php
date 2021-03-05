@@ -165,7 +165,7 @@ class Proyecto
         return $this->created;
     }
 
-    public function getUpdated(): \DateTime
+    public function getUpdated(): ?\DateTime
     {
         return $this->updated;
     }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Tarea;
+use App\Entity\Proyecto;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -118,6 +119,7 @@ class TareaType extends AbstractType
                 'required' => false,
                 'placeholder' => '--',
                 'empty_data' => null,
+                'choices' => $options['proyecto']->getTareas(),
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
@@ -134,5 +136,7 @@ class TareaType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Tarea::class,
         ]);
+        $resolver->setRequired('proyecto');
+        $resolver->setAllowedTypes('proyecto', Proyecto::class);
     }
 }

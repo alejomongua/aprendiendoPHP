@@ -35,7 +35,7 @@ class TareaController extends AbstractController
         $tarea = new Tarea();
         $tarea->setProyecto($proyecto);
         $tarea->setGeneradoPor($this->getUser());
-        $form = $this->createForm(TareaType::class, $tarea);
+        $form = $this->createForm(TareaType::class, $tarea, [ 'proyecto' => $proyecto ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,7 +69,7 @@ class TareaController extends AbstractController
      */
     public function edit(Proyecto $proyecto, Request $request, Tarea $tarea): Response
     {
-        $form = $this->createForm(TareaType::class, $tarea);
+        $form = $this->createForm(TareaType::class, $tarea, [ 'proyecto' => $proyecto ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
