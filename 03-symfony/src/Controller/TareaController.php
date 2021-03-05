@@ -33,6 +33,8 @@ class TareaController extends AbstractController
     public function new(Proyecto $proyecto, Request $request): Response
     {
         $tarea = new Tarea();
+        $tarea->setProyecto($proyecto);
+        $tarea->setGeneradoPor($this->getUser());
         $form = $this->createForm(TareaType::class, $tarea);
         $form->handleRequest($request);
 
@@ -41,7 +43,7 @@ class TareaController extends AbstractController
             $entityManager->persist($tarea);
             $entityManager->flush();
 
-            return $this->redirectToRoute('tarea_index');
+            return $this->redirectToRoute('tarea_index', [ 'proyecto' => $proyecto->getId() ]);
         }
 
         return $this->render('tarea/new.html.twig', [
@@ -73,7 +75,7 @@ class TareaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tarea_index');
+            return $this->redirectToRoute('tarea_index', [ 'proyecto' => $proyecto->getId() ]);
         }
 
         return $this->render('tarea/edit.html.twig', [
@@ -94,6 +96,6 @@ class TareaController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('tarea_index');
+        return $this->redirectToRoute('tarea_index', [ 'proyecto' => $proyecto->getId() ]);
     }
 }

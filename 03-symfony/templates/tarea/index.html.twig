@@ -35,8 +35,8 @@
                 <td>{{ tarea.created ? tarea.created|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tarea.updated ? tarea.updated|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('tarea_show', {'id': tarea.id}) }}">show</a>
-                    <a href="{{ path('tarea_edit', {'id': tarea.id}) }}">edit</a>
+                    <a href="{{ path('tarea_show', {'id': tarea.id, 'proyecto': proyecto.id}) }}">show</a>
+                    <a href="{{ path('tarea_edit', {'id': tarea.id, 'proyecto': proyecto.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

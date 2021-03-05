@@ -9,15 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=TareaRepository::class)
+ * @ORM\Table(name="`tarea`")
+ * @ORM\HasLifecycleCallbacks
  */
 class Tarea
 {
     const ESTADOS = [
-        'Creado' => 'Creado',
+        'Creada' => 'Creada',
         'En proceso' => 'En proceso',
         'En pausa' => 'En pausa',
-        'Cerrado' => 'Cerrado',
-        'Abortado' => 'Abortado',
+        'Finalizada' => 'Finalizada',
+        'Abortada' => 'Abortada',
     ];
 
     const TIPOS = [
@@ -265,26 +267,32 @@ class Tarea
         return $this->created;
     }
 
-    public function setCreated(\DateTimeInterface $created): self
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
     public function getUpdated(): ?\DateTimeInterface
     {
         return $this->updated;
     }
 
-    public function setUpdated(?\DateTimeInterface $updated): self
-    {
-        $this->updated = $updated;
+    /**
+     * Gets triggered only on insert
 
-        return $this;
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
     }
 
-    public function toString()
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime("now");
+    }
+
+    public function __toString()
     {
         return $this->titulo;
     }
