@@ -19,10 +19,10 @@ class TareaController extends AbstractController
     /**
      * @Route("/", name="tarea_index", methods={"GET"})
      */
-    public function index(Proyecto $proyecto, TareaRepository $tareaRepository): Response
+    public function index(Proyecto $proyecto): Response
     {
         return $this->render('tarea/index.html.twig', [
-            'tareas' => $tareaRepository->findAll(),
+            'tareas' => $proyecto->getTareas(),
             'proyecto' => $proyecto,
         ]);
     }

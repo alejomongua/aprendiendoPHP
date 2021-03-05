@@ -72,17 +72,16 @@
         {% endif %}
     </div>
 
-    <div class="my-4">
-        <a href="{{ path('proyecto_index') }}" class="my-4 p-4 border rounded shadow bg-green-300">
-            Ir a la lista de proyectos
-        </a>
-    </div>
-
-
-    <div class="mt-8">
-        <a href="{{ path('proyecto_edit', {'id': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300">
-            Editar este proyecto
-        </a>
+    <div class="grid grid-cols-1 sm:grid-cols-3 my-4">
+            <a href="{{ path('tarea_index', {'proyecto': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300 mx-10">
+                Ver las tareas de este proyecto
+            </a>
+            <a href="{{ path('proyecto_index') }}" class="my-4 p-4 border rounded shadow bg-green-300 mx-10">
+                Ir a la lista de proyectos
+            </a>
+            <a href="{{ path('proyecto_edit', {'id': proyecto.id}) }}" class="my-4 p-4 border rounded shadow bg-green-300 mx-10">
+                Editar este proyecto
+            </a>
     </div>
 
     {{ include('proyecto/_delete_form.html.twig') }}
