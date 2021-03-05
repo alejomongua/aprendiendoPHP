@@ -87,7 +87,7 @@ class ProyectoController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$proyecto->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($proyecto);
+            $proyecto->setEstado('Abortado');
             $entityManager->flush();
         }
 

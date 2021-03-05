@@ -5,7 +5,7 @@
 {% block body %}
 <div class="container mx-auto my-4">
     <h1 class="text-4xl leading-10 text-green-900 font-light p-4">
-        Iniciar un nuevo proyecto
+        Listado de proyectos
     </h1>
 </div>
 
@@ -13,18 +13,21 @@
     <table class="table w-full">
         <thead class="table-header-group">
             <tr class="table-row">
-                <th class="table-cell border p-2">Id</th>
                 <th class="table-cell border p-2">Titulo</th>
+                <th class="table-cell border p-2">Estado</th>
                 <th class="table-cell border p-2">Acciones</th>
             </tr>
         </thead>
         <tbody class="table-row-group">
         {% for proyecto in proyectos %}
             <tr class="table-row">
-                <td class="table-cell border p-2">{{ proyecto.id }}</td>
-                <td class="table-cell border p-2">{{ proyecto.titulo }}</td>
                 <td class="table-cell border p-2">
-                    <a class="text-blue-400 font-bold" href="{{ path('proyecto_show', {'id': proyecto.id}) }}">Ver</a> |
+                    <a class="text-blue-400 font-bold" href="{{ path('proyecto_show', {'id': proyecto.id}) }}">
+                        {{ proyecto.titulo }}
+                    </a>
+                </td>
+                <td class="table-cell border p-2">{{ proyecto.estado }}</td>
+                <td class="table-cell border p-2">
                     <a class="text-blue-400 font-bold" href="{{ path('proyecto_edit', {'id': proyecto.id}) }}">Editar</a>
                 </td>
             </tr>
