@@ -21,8 +21,6 @@ class TareaType extends AbstractType
             ->add('progreso')
             ->add('created')
             ->add('updated')
-            ->add('proyecto')
-            ->add('generado_por')
             ->add('padre')
         ;
     }
