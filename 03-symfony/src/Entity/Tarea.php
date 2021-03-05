@@ -12,6 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tarea
 {
+    const ESTADOS = [
+        'Creado' => 'Creado',
+        'En proceso' => 'En proceso',
+        'En pausa' => 'En pausa',
+        'Cerrado' => 'Cerrado',
+        'Abortado' => 'Abortado',
+    ];
+
+    const TIPOS = [
+        'Genérica' => 'Genérica',
+        'Aprender' => 'Aprender',
+        'Hacer' => 'Hacer',
+        'Recordar' => 'Recordar',
+    ];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -269,4 +283,10 @@ class Tarea
 
         return $this;
     }
+
+    public function toString()
+    {
+        return $this->titulo;
+    }
+
 }

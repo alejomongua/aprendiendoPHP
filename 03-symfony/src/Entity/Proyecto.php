@@ -220,4 +220,8 @@ class Proyecto
         return $this;
     }
 
+    public function toString()
+    {
+        return $this->titulo;
+    }
 }
