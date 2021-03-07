@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -76,6 +77,9 @@ class ProyectoType extends AbstractType
                     'class' => 'mx-4 font-semibold'
                 ],
                 'required' => false,
+            ])
+            ->add('etiquetas', HiddenType::class, [
+                'mapped' => false
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [

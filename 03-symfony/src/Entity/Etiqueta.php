@@ -5,10 +5,12 @@ namespace App\Entity;
 use App\Repository\EtiquetaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EtiquetaRepository::class)
+ * @UniqueEntity(fields={"nombre"}, message="Ya existe esta etiqueta")
  */
 class Etiqueta
 {
@@ -25,7 +27,7 @@ class Etiqueta
     private $nombre;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true, unique=true)
      */
     private $descripcion;
 

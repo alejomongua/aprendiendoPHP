@@ -37,6 +37,19 @@ class ProyectoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Traiga las etiquetas del formulario
+            $etiquetas = json_decode($form->get('plainPassword')->getData());
+            
+            // Verifique que el campo no esté vacío
+            if ($etiquetas) {
+                foreach ($etiquetas as $etiqueta) {
+                    // Insértelas en la tabla de etiquetas si no existen
+
+                    // Agréguelas a la relación ManyToMany
+                }
+    
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($proyecto);
             $entityManager->flush();
