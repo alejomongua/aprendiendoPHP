@@ -83,10 +83,16 @@ class Proyecto
      */
     private $etiquetas;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="proyectosAutorizados")
+     */
+    private $autorizados;
+
     public function __construct()
     {
         $this->tareas = new ArrayCollection();
         $this->etiquetas = new ArrayCollection();
+        $this->autorizados = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,6 +257,30 @@ class Proyecto
     public function removeEtiqueta(Etiqueta $etiqueta): self
     {
         $this->etiquetas->removeElement($etiqueta);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getAutorizados(): Collection
+    {
+        return $this->autorizados;
+    }
+
+    public function addAutorizado(User $autorizado): self
+    {
+        if (!$this->autorizados->contains($autorizado)) {
+            $this->autorizados[] = $autorizado;
+        }
+
+        return $this;
+    }
+
+    public function removeAutorizado(User $autorizado): self
+    {
+        $this->autorizados->removeElement($autorizado);
 
         return $this;
     }

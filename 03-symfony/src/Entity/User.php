@@ -75,10 +75,16 @@ class User implements UserInterface
      */
     private $tareas;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Proyecto::class, mappedBy="autorizados")
+     */
+    private $proyectosAutorizados;
+
     public function __construct()
     {
         $this->proyectos = new ArrayCollection();
         $this->tareas = new ArrayCollection();
+        $this->proyectosAutorizados = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,6 +272,33 @@ class User implements UserInterface
             if ($tarea->getGeneradoPor() === $this) {
                 $tarea->setGeneradoPor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Proyecto[]
+     */
+    public function getProyectosAutorizados(): Collection
+    {
+        return $this->proyectosAutorizados;
+    }
+
+    public function addProyectosAutorizado(Proyecto $proyectosAutorizado): self
+    {
+        if (!$this->proyectosAutorizados->contains($proyectosAutorizado)) {
+            $this->proyectosAutorizados[] = $proyectosAutorizado;
+            $proyectosAutorizado->addAutorizado($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProyectosAutorizado(Proyecto $proyectosAutorizado): self
+    {
+        if ($this->proyectosAutorizados->removeElement($proyectosAutorizado)) {
+            $proyectosAutorizado->removeAutorizado($this);
         }
 
         return $this;
