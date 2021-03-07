@@ -78,9 +78,15 @@ class Proyecto
      */
     private $tareas;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Etiqueta::class, inversedBy="proyectos")
+     */
+    private $etiquetas;
+
     public function __construct()
     {
         $this->tareas = new ArrayCollection();
+        $this->etiquetas = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,5 +229,29 @@ class Proyecto
     public function __toString()
     {
         return $this->titulo;
+    }
+
+    /**
+     * @return Collection|Etiqueta[]
+     */
+    public function getEtiquetas(): Collection
+    {
+        return $this->etiquetas;
+    }
+
+    public function addEtiqueta(Etiqueta $etiqueta): self
+    {
+        if (!$this->etiquetas->contains($etiqueta)) {
+            $this->etiquetas[] = $etiqueta;
+        }
+
+        return $this;
+    }
+
+    public function removeEtiqueta(Etiqueta $etiqueta): self
+    {
+        $this->etiquetas->removeElement($etiqueta);
+
+        return $this;
     }
 }
