@@ -32,6 +32,7 @@ class ProyectoController extends AbstractController
     {
         $proyecto = new Proyecto();
         $proyecto->setGeneradoPor($this->getUser());
+        $proyecto->addAutorizado($this->getUser());
         $form = $this->createForm(ProyectoType::class, $proyecto);
         $form->handleRequest($request);
 
