@@ -10,11 +10,30 @@
     </h1>
 
     {% if app.user.isVerified %}
-        <div>TO DO: Lista de proyectos</div>
+        <h2 class="text-2xl leading-10 text-green-900 font-extralight p-4">
+            Proyectos en curso
+        </h2>
+        <ul>
+            {% for proyecto in proyectos %}
+                <li class="table-row">
+                    <div class="table-cell">
+                        <a class="text-blue-400 font-bold" href="{{ path('proyecto_show', {'id': proyecto.id}) }}">
+                            {{ proyecto.titulo }}
+                        </a>
+                    </div>
+                </li>
+            {% else %}
+                <div class='table-row'>
+                    <div colspan="3" class="table-cell border p-2 text-2xl font-extralight text-red-700">
+                        No hay proytectos en curso
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
 
         <div class="my-4">
             <a href="{{ path('proyecto_index') }}" class="my-4 p-4 border rounded shadow bg-green-300">
-                Ir a la lista de proyectos
+                Ir al listado completo de proyectos
             </a>
         </div>
     {% else %}

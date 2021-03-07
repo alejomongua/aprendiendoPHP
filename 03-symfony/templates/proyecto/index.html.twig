@@ -32,8 +32,10 @@
                 </td>
             </tr>
         {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
+            <tr class='table-row'>
+                <td colspan="3" class="table-cell border p-2 text-2xl font-extralight text-red-700">
+                    No hay proyectos aún
+                </td>
             </tr>
         {% endfor %}
         </tbody>
