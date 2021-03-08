@@ -38,13 +38,13 @@ class ProyectoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Traiga las etiquetas del formulario
-            $etiquetas = json_decode($form->get('plainPassword')->getData());
+            $etiquetas = json_decode($form->get('etiquetas')->getData());
             
             // Verifique que el campo no esté vacío
             if ($etiquetas) {
                 foreach ($etiquetas as $etiqueta) {
                     // Insértelas en la tabla de etiquetas si no existen
-
+                    
                     // Agréguelas a la relación ManyToMany
                 }
     

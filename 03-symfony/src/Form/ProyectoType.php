@@ -79,12 +79,15 @@ class ProyectoType extends AbstractType
                 'required' => false,
             ])
             ->add('etiquetas', HiddenType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'etiquetas',
+                ],
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'my-4 p-4 border rounded shadow bg-blue-300',
-                    'type' => 'submit'
+                    'type' => 'submit',
                 ],
                 'label' => 'Guardar',
             ])

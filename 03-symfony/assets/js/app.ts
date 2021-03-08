@@ -1,8 +1,10 @@
+import etiquetas from './etiquetas'
 
 document.addEventListener('DOMContentLoaded', function () {
-    const jsController = document.querySelector('body')?.dataset.javascript
+    const etiquetasTag = <HTMLInputElement>document.querySelector('.etiquetas')
+    const etiquetasSeleccionadas = <HTMLDivElement>document.querySelector('#etiquetas-seleccionadas')
 
-    if (jsController === 'proyectoNew') {
-        console.log('código removido')
+    if (etiquetasTag && etiquetasSeleccionadas) {
+        etiquetas(etiquetasTag, etiquetasSeleccionadas)
     }
 })
