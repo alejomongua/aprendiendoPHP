@@ -33,7 +33,7 @@ class ProyectoController extends AbstractController
         $proyecto = new Proyecto();
         $proyecto->setGeneradoPor($this->getUser());
         $proyecto->addAutorizado($this->getUser());
-        $form = $this->createForm(ProyectoType::class, $proyecto);
+        $form = $this->createForm(ProyectoType::class, $proyecto, [ 'etiquetas' => $proyecto->nombresEtiquetas() ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +79,7 @@ class ProyectoController extends AbstractController
      */
     public function edit(Request $request, Proyecto $proyecto): Response
     {
-        $form = $this->createForm(ProyectoType::class, $proyecto);
+        $form = $this->createForm(ProyectoType::class, $proyecto, [ 'etiquetas' => $proyecto->nombresEtiquetas() ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

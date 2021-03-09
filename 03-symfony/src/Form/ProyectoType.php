@@ -83,7 +83,7 @@ class ProyectoType extends AbstractType
                 'attr' => [
                     'class' => 'etiquetas',
                 ],
-                'data' => '["To do", "Borrar", "Esto"]',
+                'data' => $options['etiquetas'],
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
@@ -100,5 +100,7 @@ class ProyectoType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Proyecto::class,
         ]);
+        $resolver->setRequired('etiquetas');
+        $resolver->setAllowedTypes('etiquetas', 'string');
     }
 }

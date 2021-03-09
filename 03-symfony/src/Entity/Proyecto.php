@@ -261,6 +261,14 @@ class Proyecto
         return $this;
     }
 
+    public function nombresEtiquetas(): string {
+        $arrayEtiquetas = array_map(function (Etiqueta $etiqueta) {
+            return $etiqueta->getNombre();
+        }, $this->etiquetas->toArray());
+
+        return json_encode($arrayEtiquetas);
+    }
+
     /**
      * @return Collection|User[]
      */
