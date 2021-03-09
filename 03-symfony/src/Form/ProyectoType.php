@@ -83,6 +83,7 @@ class ProyectoType extends AbstractType
                 'attr' => [
                     'class' => 'etiquetas',
                 ],
+                'data' => '["To do", "Borrar", "Esto"]',
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [
