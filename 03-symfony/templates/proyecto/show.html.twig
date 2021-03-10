@@ -70,6 +70,8 @@
                 {{ proyecto.updated|date("m/d/Y g:i a") }}
             </div>
         {% endif %}
+
+        {% include 'etiqueta/_mostrar.html.twig' with {'etiquetas': proyecto.etiquetas } %}
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 my-4">
