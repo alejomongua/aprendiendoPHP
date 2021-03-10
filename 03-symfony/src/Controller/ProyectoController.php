@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Proyecto;
+use App\Entity\Etiqueta;
 use App\Form\ProyectoType;
 use App\Repository\ProyectoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,20 +38,32 @@ class ProyectoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
             // Traiga las etiquetas del formulario
             $etiquetas = json_decode($form->get('etiquetas')->getData());
             
             // Verifique que el campo no esté vacío
             if ($etiquetas) {
+                $etiquetasRepository = $this->getDoctrine()->getRepository(Etiqueta::class);
                 foreach ($etiquetas as $etiqueta) {
-                    // Insértelas en la tabla de etiquetas si no existen
-                    
+                    // Busque si la etiqueta existe
+                    $newEtiqueta = $etiquetasRepository->findOneBy(['nombre' => $etiqueta]);
+
+                    // Si no exite insertela en la base de datos
+                    if (!$newEtiqueta) {
+                        $newEtiqueta = new Etiqueta();
+                        $newEtiqueta->setNombre($etiqueta);
+                        $entityManager->persist($newEtiqueta);
+                        $entityManager->flush();
+                    }
+
                     // Agréguelas a la relación ManyToMany
+                    $proyecto->addEtiqueta($newEtiqueta);
                 }
     
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($proyecto);
             $entityManager->flush();
 
