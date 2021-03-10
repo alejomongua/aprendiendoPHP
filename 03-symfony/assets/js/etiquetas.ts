@@ -18,7 +18,6 @@ export default (etiquetasTag: HTMLInputElement, etiquetasSeleccionadas: HTMLDivE
     const dibujarEtiquetas = () => {
         etiquetasSeleccionadas.innerHTML = ''
         valorActual.forEach((etiqueta: string) => {
-            console.log(etiqueta)
             const tagDiv = crearDiv(etiquetasSeleccionadas, {
                 clase: "flex m-2 p-2 border bg-green-400 text-gray-900",
             })
@@ -27,12 +26,21 @@ export default (etiquetasTag: HTMLInputElement, etiquetasSeleccionadas: HTMLDivE
             })
             const eliminar = crearDiv(tagDiv, {
                 contenido: 'X',
-                clase: "border mx-2 px-2 eliminar-etiqueta",
+                clase: "border mx-2 px-2 eliminar-etiqueta cursor-pointer",
             })
             eliminar.dataset.etiqueta = etiqueta
+            eliminar.addEventListener('click', () => {
+                eliminarEtiqueta(etiqueta)
+            })
         })
     }
 
+    const eliminarEtiqueta = (etiqueta: string) => {
+        valorActual = valorActual.filter((item: string) => item !== etiqueta)
+
+        etiquetasTag.value = JSON.stringify(valorActual)
+        dibujarEtiquetas()
+    }
 
     const agregarEtiqueta = (etiqueta: string) => {
         valorActual.push(etiqueta)
@@ -40,10 +48,11 @@ export default (etiquetasTag: HTMLInputElement, etiquetasSeleccionadas: HTMLDivE
         // Elimine los duplicados
         valorActual = Array.from(new Set(valorActual))
 
+        etiquetasTag.value = JSON.stringify(valorActual)
         dibujarEtiquetas()
     }
 
-    buttonAddEtiqueta.addEventListener('click', () => {
+    const funAgregarEtiqueta = () => {
         if (!inputEtiqueta.value) {
             return
         }
@@ -51,13 +60,22 @@ export default (etiquetasTag: HTMLInputElement, etiquetasSeleccionadas: HTMLDivE
         agregarEtiqueta(inputEtiqueta.value)
         inputEtiqueta.value = ''
         buttonAddEtiqueta.setAttribute('disabled', 'disabled')
-    })
+    }
 
-    inputEtiqueta.addEventListener('keydown', () => {
+    buttonAddEtiqueta.addEventListener('click', funAgregarEtiqueta)
+
+    inputEtiqueta.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.key == "Enter") {
+            funAgregarEtiqueta()
+            event.preventDefault()
+            return
+        }
         if (inputEtiqueta.value) {
             buttonAddEtiqueta.removeAttribute('disabled')
         } else {
             buttonAddEtiqueta.setAttribute('disabled', 'disabled')
         }
     })
+
+    dibujarEtiquetas()
 }

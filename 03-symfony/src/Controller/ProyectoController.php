@@ -16,6 +16,30 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProyectoController extends AbstractController
 {
+    private function agregarEtiquetas($entityManager, $etiquetas, $proyecto) {
+        // Verifique que el campo no esté vacío
+        if ($etiquetas) {
+            $etiquetasRepository = $this->getDoctrine()->getRepository(Etiqueta::class);
+            foreach ($etiquetas as $etiqueta) {
+                // Busque si la etiqueta existe
+                $newEtiqueta = $etiquetasRepository->findOneBy(['nombre' => $etiqueta]);
+                
+                // Si no exite insertela en la base de datos
+                if (!$newEtiqueta) {
+                    $newEtiqueta = new Etiqueta();
+                    $newEtiqueta->setNombre($etiqueta);
+                    $entityManager->persist($newEtiqueta);
+                    $entityManager->flush();
+                }
+                
+                // Agréguelas a la relación ManyToMany
+                $proyecto->addEtiqueta($newEtiqueta);
+            }
+            
+        }
+        
+    }
+
     /**
      * @Route("/", name="proyecto_index", methods={"GET"})
      */
@@ -25,7 +49,7 @@ class ProyectoController extends AbstractController
             'proyectos' => $proyectoRepository->findAll(),
         ]);
     }
-
+        
     /**
      * @Route("/new", name="proyecto_new", methods={"GET","POST"})
      */
@@ -36,34 +60,12 @@ class ProyectoController extends AbstractController
         $proyecto->addAutorizado($this->getUser());
         $form = $this->createForm(ProyectoType::class, $proyecto, [ 'etiquetas' => $proyecto->nombresEtiquetas() ]);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-
             // Traiga las etiquetas del formulario
             $etiquetas = json_decode($form->get('etiquetas')->getData());
-            
-            // Verifique que el campo no esté vacío
-            if ($etiquetas) {
-                $etiquetasRepository = $this->getDoctrine()->getRepository(Etiqueta::class);
-                foreach ($etiquetas as $etiqueta) {
-                    // Busque si la etiqueta existe
-                    $newEtiqueta = $etiquetasRepository->findOneBy(['nombre' => $etiqueta]);
-
-                    // Si no exite insertela en la base de datos
-                    if (!$newEtiqueta) {
-                        $newEtiqueta = new Etiqueta();
-                        $newEtiqueta->setNombre($etiqueta);
-                        $entityManager->persist($newEtiqueta);
-                        $entityManager->flush();
-                    }
-
-                    // Agréguelas a la relación ManyToMany
-                    $proyecto->addEtiqueta($newEtiqueta);
-                }
-    
-            }
-
+            $this->agregarEtiquetas($entityManager, $etiquetas, $proyecto);
             $entityManager->persist($proyecto);
             $entityManager->flush();
 
@@ -96,7 +98,11 @@ class ProyectoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            // Traiga las etiquetas del formulario
+            $etiquetas = json_decode($form->get('etiquetas')->getData());
+            $this->agregarEtiquetas($entityManager, $etiquetas, $proyecto);
+            $entityManager->flush();
 
             return $this->redirectToRoute('proyecto_index');
         }
