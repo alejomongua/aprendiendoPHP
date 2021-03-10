@@ -6,9 +6,9 @@
 
         <div class="w-full mb-2 flex flex-wrap">
             {% for etiqueta in etiquetas %}
-                <div class="m-2 p-2 border bg-green-300 text-gray-900">
-                    {{ etiqueta }}
-                </div>
+                <a href="{{ path('etiqueta_show', {'id': etiqueta.id}) }}"class="m-2 p-2 border bg-green-300 text-gray-900">
+                    {{ etiqueta.nombre }}
+                </a>
             {% endfor %}
         </div>
     </div>

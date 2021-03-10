@@ -95,6 +95,8 @@
                 {{ tarea.updated|date("m/d/Y g:i a") }}
             </div>
         {% endif %}
+
+        {% include 'etiqueta/_mostrar.html.twig' with {'etiquetas': tarea.etiquetas } %}
     </div>
 
     <div class="my-4">
