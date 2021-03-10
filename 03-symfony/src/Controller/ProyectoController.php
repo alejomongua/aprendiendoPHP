@@ -35,9 +35,7 @@ class ProyectoController extends AbstractController
                 // Agréguelas a la relación ManyToMany
                 $proyecto->addEtiqueta($newEtiqueta);
             }
-            
         }
-        
     }
 
     /**

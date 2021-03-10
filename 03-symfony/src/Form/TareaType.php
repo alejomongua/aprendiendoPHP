@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -121,6 +122,13 @@ class TareaType extends AbstractType
                 'empty_data' => null,
                 'choices' => $options['proyecto']->getTareas(),
             ])
+            ->add('etiquetas', HiddenType::class, [
+                'mapped' => false,
+                'attr' => [
+                    'class' => 'etiquetas',
+                ],
+                'data' => $options['etiquetas'],
+            ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'my-4 p-4 border rounded shadow bg-blue-300',
@@ -138,5 +146,7 @@ class TareaType extends AbstractType
         ]);
         $resolver->setRequired('proyecto');
         $resolver->setAllowedTypes('proyecto', Proyecto::class);
+        $resolver->setRequired('etiquetas');
+        $resolver->setAllowedTypes('etiquetas', 'string');
     }
 }

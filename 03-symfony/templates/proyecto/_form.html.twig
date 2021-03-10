@@ -1,10 +1,10 @@
 {{ form_start(form) }}
-    {{form_row(form.titulo)}}
-    {{form_row(form.inicio)}}
-    {{form_row(form.fin)}}
-    {{form_row(form.estado)}}
-    {{form_row(form.descripcion)}}
+    {{ form_row(form.titulo) }}
+    {{ form_row(form.inicio) }}
+    {{ form_row(form.fin) }}
+    {{ form_row(form.estado) }}
+    {{ form_row(form.descripcion) }}
     {{ include('etiqueta/_selector.html.twig') }}
-    {{form_row(form.etiquetas)}}
-    {{form_row(form.save)}}
+    {{ form_row(form.etiquetas) }}
+    {{ form_row(form.save) }}
 {{ form_end(form) }}
