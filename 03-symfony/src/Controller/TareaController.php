@@ -39,6 +39,19 @@ class TareaController extends AbstractController
         }
     }
 
+    private function eliminarEtiquetas($entityManager, $etiquetas, $tarea) {
+        $diferenciaEtiquetas = array_diff($tarea->nombresEtiquetasArray(), $etiquetas);
+        if ($diferenciaEtiquetas) {
+            $etiquetasRepository = $this->getDoctrine()->getRepository(Etiqueta::class);
+
+            foreach ($diferenciaEtiquetas as $_etiqueta) {
+                $etiqueta = $etiquetasRepository->findOneBy(['nombre' => $_etiqueta]);
+                // Bórrelas a la relación ManyToMany
+                $tarea->removeEtiqueta($etiqueta);
+            }
+        }
+    }
+
     /**
      * @Route("/", name="tarea_index", methods={"GET"})
      */
@@ -106,7 +119,15 @@ class TareaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            // Traiga las etiquetas del formulario
+            $etiquetas = json_decode($form->get('etiquetas')->getData());
+
+            $this->agregarEtiquetas($entityManager, $etiquetas, $tarea);
+
+            $this->eliminarEtiquetas($entityManager, $etiquetas, $tarea);
+
+            $entityManager->flush();
 
             return $this->redirectToRoute('tarea_index', [ 'proyecto' => $proyecto->getId() ]);
         }

@@ -37,6 +37,18 @@ class ProyectoController extends AbstractController
             }
         }
     }
+    private function eliminarEtiquetas($entityManager, $etiquetas, $proyecto) {
+        $diferenciaEtiquetas = array_diff($proyecto->nombresEtiquetasArray(), $etiquetas);
+        if ($diferenciaEtiquetas) {
+            $etiquetasRepository = $this->getDoctrine()->getRepository(Etiqueta::class);
+
+            foreach ($diferenciaEtiquetas as $_etiqueta) {
+                $etiqueta = $etiquetasRepository->findOneBy(['nombre' => $_etiqueta]);
+                // Bórrelas a la relación ManyToMany
+                $proyecto->removeEtiqueta($etiqueta);
+            }
+        }
+    }
 
     /**
      * @Route("/", name="proyecto_index", methods={"GET"})
@@ -99,7 +111,11 @@ class ProyectoController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             // Traiga las etiquetas del formulario
             $etiquetas = json_decode($form->get('etiquetas')->getData());
+
             $this->agregarEtiquetas($entityManager, $etiquetas, $proyecto);
+
+            $this->eliminarEtiquetas($entityManager, $etiquetas, $proyecto);
+
             $entityManager->flush();
 
             return $this->redirectToRoute('proyecto_index');

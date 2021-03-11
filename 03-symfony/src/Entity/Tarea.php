@@ -328,12 +328,14 @@ class Tarea
         return $this;
     }
 
-    public function nombresEtiquetas(): string {
-        $arrayEtiquetas = array_map(function (Etiqueta $etiqueta) {
+    public function nombresEtiquetasArray(): array {
+        return array_map(function (Etiqueta $etiqueta) {
             return $etiqueta->getNombre();
         }, $this->etiquetas->toArray());
+    }
 
-        return json_encode($arrayEtiquetas);
+    public function nombresEtiquetas(): string {
+        return json_encode($this->nombresEtiquetasArray());
     }
 
     public function activa()
