@@ -119,6 +119,7 @@ class Proyecto
 
     public function setFin(?\DateTimeInterface $fin): self
     {
+        $fin->setTime(23, 59, 59);
         $this->fin = $fin;
 
         return $this;

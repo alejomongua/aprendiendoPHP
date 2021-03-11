@@ -161,6 +161,7 @@ class Tarea
 
     public function setFin(?\DateTimeInterface $fin): self
     {
+        $fin->setTime(23, 59, 59);
         $this->fin = $fin;
 
         return $this;
@@ -357,12 +358,7 @@ class Tarea
         }
 
         $hoy = new \DateTime();
-        if ($this->inicio > $hoy) {
-            return false;
-        }
-
-        $hoy->setTime(23, 59, 59);
-        return $this->fin > $hoy;
+        return $this->inicio < $hoy && $hoy < $this->fin;
     }
 
 }
