@@ -210,6 +210,26 @@ class Proyecto
         return $this->tareas;
     }
 
+    /**
+     * @return Collection|Tarea[]
+     */
+    public function getTareasVencidas(): Collection
+    {
+        return $this->tareas->filter(function(Tarea $tarea) {
+            return $tarea->vencida();
+        });
+    }
+
+    /**
+     * @return Collection|Tarea[]
+     */
+    public function getTareasParaHoy(): Collection
+    {
+        return $this->tareas->filter(function(Tarea $tarea) {
+            return $tarea->paraHoy();
+        });
+    }
+
     public function addTarea(Tarea $tarea): self
     {
         if (!$this->tareas->contains($tarea)) {

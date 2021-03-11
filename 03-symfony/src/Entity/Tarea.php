@@ -334,4 +334,35 @@ class Tarea
 
         return json_encode($arrayEtiquetas);
     }
+
+    public function activa()
+    {
+        $estado = $this->getEstado();
+        return $estado == 'Creada' || $estado == 'En proceso' || $estado == 'En pausa';
+    }
+
+    public function vencida() {
+        if (!$this->activa()) {
+            return false;
+        }
+
+        $finDelDia = new \DateTime();
+        $finDelDia->setTime(23, 59, 59);
+        return $this->fin < $finDelDia;
+    }
+
+    public function paraHoy() {
+        if (!$this->activa()) {
+            return false;
+        }
+
+        $hoy = new \DateTime();
+        if ($this->inicio > $hoy) {
+            return false;
+        }
+
+        $hoy->setTime(23, 59, 59);
+        return $this->fin > $hoy;
+    }
+
 }

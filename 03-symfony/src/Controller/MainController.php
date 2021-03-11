@@ -29,11 +29,13 @@ class MainController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $proyectos = $user->getProyectos()->filter(function(Proyecto $proyecto)
+        $proyectos = $user->getProyectosAutorizados()->filter(function(Proyecto $proyecto)
         {
             return $proyecto->getEstado() == 'En proceso';
         });
 
-        return $this->render('main/home.html.twig', [ 'proyectos' => $proyectos ]);
+        return $this->render('main/home.html.twig', [
+            'proyectos' => $proyectos,
+        ]);
     }
 }
