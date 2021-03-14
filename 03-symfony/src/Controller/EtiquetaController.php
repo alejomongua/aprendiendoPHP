@@ -26,44 +26,21 @@ class EtiquetaController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="etiqueta_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $etiquetum = new Etiqueta();
-        $form = $this->createForm(EtiquetaType::class, $etiquetum);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($etiquetum);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('etiqueta_index');
-        }
-
-        return $this->render('etiqueta/new.html.twig', [
-            'etiquetum' => $etiquetum,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="etiqueta_show", methods={"GET"})
      */
-    public function show(Etiqueta $etiquetum): Response
+    public function show(Etiqueta $etiqueta): Response
     {
         return $this->render('etiqueta/show.html.twig', [
-            'etiquetum' => $etiquetum,
+            'etiqueta' => $etiqueta,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="etiqueta_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Etiqueta $etiquetum): Response
+    public function edit(Request $request, Etiqueta $etiqueta): Response
     {
-        $form = $this->createForm(EtiquetaType::class, $etiquetum);
+        $form = $this->createForm(EtiquetaType::class, $etiqueta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -73,7 +50,7 @@ class EtiquetaController extends AbstractController
         }
 
         return $this->render('etiqueta/edit.html.twig', [
-            'etiquetum' => $etiquetum,
+            'etiqueta' => $etiqueta,
             'form' => $form->createView(),
         ]);
     }
@@ -81,11 +58,11 @@ class EtiquetaController extends AbstractController
     /**
      * @Route("/{id}", name="etiqueta_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Etiqueta $etiquetum): Response
+    public function delete(Request $request, Etiqueta $etiqueta): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$etiquetum->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$etiqueta->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($etiquetum);
+            $entityManager->remove($etiqueta);
             $entityManager->flush();
         }
 
