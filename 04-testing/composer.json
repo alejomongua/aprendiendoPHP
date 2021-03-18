@@ -1,0 +1,23 @@
+{
+    "name": "alejo/04-testing",
+    "authors": [
+        {
+            "name": "Alejandro Mongua",
+            "email": "alejandro.mongua@gmail.com"
+        }
+    ],
+    "description": "Empezando con testing en PHP",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
